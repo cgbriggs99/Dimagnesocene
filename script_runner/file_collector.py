@@ -14,7 +14,7 @@ Descends a directory tree and returns all of the files.
     dirs = [directory]
     out = []
 
-    while len(olist) != 0 :
+    while len(dirs) != 0 :
         # Pop the last entry.
         curr = dirs.pop()
 
@@ -28,16 +28,16 @@ Descends a directory tree and returns all of the files.
             continue
 
         # Find the files within it.
-        neighbors = os.listdir(curr)
+        neighbors = map(lambda x: curr + "/" + x, os.listdir(curr))
 
         # We can assume that all files are new.
         for entry in neighbors :
-            if os.path.isdir(entry) and entry not in [".", ".."] :
+            if os.path.isdir(entry) :
                 # Add directories to the search list.
                 dirs.append(entry)
             elif os.path.isfile(entry) :
                 # Add files to the out list.
-                out.append(file)
+                out.append(entry)
             else :
                 # Otherwise, ignore it.
                 pass
@@ -132,7 +132,7 @@ Collects files from the directory tree.
     for d in input_dirs :
         # Collect all files.
         files = descend_tree(d)
-
+        
         # Add to the output, but only if it was not seen before.
         # Keep the list sorted for fast insertion.
         for file in files :
@@ -149,7 +149,7 @@ Go line by line and collect inputs from a file.
     files = []
     dirs = []
     for file in input_files :
-        with fp as open(file, "r") :
+        with open(file, "r") as fp :
             for line in fp :
                 if line[0] == "#" :
                     # Skip a comment.
@@ -193,12 +193,14 @@ Collects input scripts and returns them as a list.
     filter_files = collect_tree(dirs)
     incl_files = []
     for file in filter_files :
-        if any(re.fullmatch(pat, file) is not None for pat in patterns) :
+        if any(re.fullmatch(pat, file) is not None for pat in patterns) or \
+           len(patterns) == 0:
             incl_files.append(file)
 
     for file in incl_files :
         if all(re.fullmatch(pat, file) is None for pat in exclude_patterns) or \
            all(re.fullmatch(pat, file) is None for pat in files_exclude) :
             files.append(file)
+
     # Found all files.
     return files

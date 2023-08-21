@@ -2,7 +2,12 @@
 
 import os
 import sys
-import mpy4py.futures
+try :
+    import mpi4py.futures
+    do_mpi = True
+except ImportError as err :
+    do_mpi = False
+    print(err.msg + "\nWill run as concurrent instead.", sys.stderr)
 import concurrent.futures
 
 def transform_command(command, in_file, out_file) :
@@ -71,6 +76,7 @@ Runs a command on several files sequentially.
 """
     for in_file, out_file in zip(in_files, out_files) :
         os.system(transform_command(command, in_file, out_file))
+
     
 def run_parallel(command, in_files, out_files, max_workers = None) :
     """
@@ -80,12 +86,12 @@ run_parallel
 Runs a command in parallel.
 
 """
-
+    commands = map(lambda inf, outf : \
+                   transform_command(command, inf, outf),
+                   in_files, out_files)
     with concurrent.futures.ProcessPoolExecutor(max_workers) as executor :
-        res = executor.map(lambda inf, outf : \
-                     os.system(transform_command(command, inf, outf)),
-                     in_files, out_files)
-        concurrent.futures.wait(res)
+        res = executor.map(os.system, commands)
+        #concurrent.futures.wait(res)
 
 def run_mpi(command, in_files, out_files, max_workers = None) :
     """
@@ -94,11 +100,15 @@ run_mpi
 
 Runs a command in parallel using MPI.
 """
-    with mpi4py.futures.MPIPoolExecutor(max_workers) as executor :
-        res = executor.map(lambda inf, outf : \
-                           os.system(transform_command(command, inf, outf)),
-                           in_files, out_files)
-        mpi4py.futures.wait(res)
+    if do_mpi :
+        commands = map(lambda inf, outf : \
+                       transform_command(command, inf, outf),
+                       in_files, out_files)
+        with mpi4py.futures.MPIPoolExecutor(max_workers) as executor :
+            res = executor.map(os.system, commands)
+            #mpi4py.futures.wait(res)
+    else :
+        run_parallel(command, in_files, out_files, max_workers)
 
 
     

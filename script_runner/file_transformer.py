@@ -76,6 +76,7 @@ Transforms all files in a list using the given replacements.
 
     out = []
     for file in files :
-        out.append(out_dir + transform(os.path.basename(file), patterns))
+        out.append((out_dir if out_dir is not None else "")
+                   + transform(os.path.basename(file), patterns))
     return out
     
