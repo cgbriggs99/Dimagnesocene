@@ -26,8 +26,8 @@ molecule becp {
     H 8 dch 9 126 10 180
     H 9 dch 10 126 6 180
     H 10 dch 6 126 7 180
-    Be 1 dcbe 11 achbe 6 0
-    Be 6 dcbe 16 achbe 1 0
+    Mg 1 dcbe 11 achbe 6 0
+    Mg 6 dcbe 16 achbe 1 0
 
     dcc = 1.33
     drr = 5.092
@@ -50,7 +50,7 @@ try :
 except Exception as e :
     pass
 
-methods = ["hf/sto-3g"]
+#methods = ["hf/sto-3g"]
 
 retcode = None
 
@@ -60,9 +60,9 @@ try :
     if do_opt :
         optimize("hf/sto-3g")
         optimized = True
+    """
     #ens = {meth: energy(meth, return_wfn = True) for meth in methods}
     vibs = {meth: frequency(meth, return_wfn = True) for meth in methods}
-
     with open("out/data.out", "w+") as data :
         for meth in methods :
             print(meth, file = data)
@@ -71,7 +71,7 @@ try :
             #lumo = ens[meth][1].epsilon_a_subset("AO", "ALL")[ens[meth][1].nalpha() + 1]
             #print(f"HOMO: {homo}\nLUMO: {lumo}\nHOMO-LUMO Gap: {lumo - homo}", file = data)
             print(f"Frequencies: {vibs[meth][1].frequencies()}", file = data)
-    
+"""
 except Exception as e :
     retcode = e
 

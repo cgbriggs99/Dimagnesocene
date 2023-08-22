@@ -212,7 +212,8 @@ def parse_range_var(name, definition) :
     else :
         raise SyntaxError
         
-def generate_files(in_file, out_dir, out_prefix, out_suffix, variables) :
+def generate_files(in_file, out_dir, out_prefix, out_suffix, variables,
+                   numbering) :
     """
 generate_files
 --------------
@@ -229,6 +230,7 @@ Preprocesses a file with the given variable replacements.
     exit_cond = False
 
     names = [var.name for var in variables]
+    index = 0
 
     # Check to see if the directory exists. If not, create it.
     if not os.path.isdir(out_dir) :
@@ -237,7 +239,11 @@ Preprocesses a file with the given variable replacements.
         # Generate the values.
         vals = [variables[i][indices[i]] for i in range(len(variables))]
         # Generate the file.
-        generate_file(fmt_str.format(*indices), in_file, vals, names)
+        if numbering == "indexed" :
+            generate_file(fmt_str.format(*indices), in_file, vals, names)
+        else :
+            generate_file(out_dir + "/" + out_prefix + f"-{index}" + out_suffix,
+                          in_file, vals, names)
 
         # Increment the values.
         indices[0] += 1
@@ -248,6 +254,19 @@ Preprocesses a file with the given variable replacements.
         # Gone through all possibilities.
         if indices[-1] == max_vals[-1] :
             exit_cond = True
+        index += 1
+
+def quote(string) :
+    out = ""
+    for ch in string :
+        if ch == "\"" :
+            out += "\\\""
+        elif ch == "\\" :
+            out += "\\\\"
+        else :
+            out += ch
+    return out
+    
 
 def generate_file(fname, infile, vals, names) :
     """
@@ -262,16 +281,27 @@ Generates a single file.
     if not os.path.isdir(os.path.dirname(fname)) :
         os.mkdir(os.path.dirname(fname))
     outfp = open(fname, "w+")
+
+    # Go through the variables and write them to the file.
+    for val, name in zip(vals, names) :
+        if isinstance(val, str) :
+            print(f"{name} = \"{quote(val)}\"", file = outfp)
+        else :
+            print(f"{name} = {val}", file = outfp)
     
     for line in infp :
-        if line[0] == "%" : # Skip these.
+        if line[0] == "%" : # Skip this line.
             continue
-        # Replace occurrences.
-        for val, name in zip(vals, names) :
-            if isinstance(val, str) :
-                line = line.replace(name, val)
-            else :
-                line = line.replace(name, str(val))
+        # Replace occurrences. Repeat until the values are equal.
+        while True :
+            line_start = line
+            for val, name in zip(vals, names) :
+                if isinstance(val, str) :
+                    line = line.replace("$" + name + "$", val)
+                else :
+                    line = line.replace("$" + name + "$", str(val))
+            if line_start == line :
+                break;
         # Output transformed line.
         print(line, end = "", file = outfp)
     infp.close()
