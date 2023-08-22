@@ -65,7 +65,8 @@ potential energy surfaces, but its utility may extend beyond that.
     parser.add_argument("-p", "--prefix", help = "Prefix for files. Defaults to the input file name.", default = None)
     parser.add_argument("-s", "--suffix", help = "Suffix for files. Defaults to .in", default = ".in")
     parser.add_argument("--numbering", help = "Numbering scheme for output files.",
-                        choices = ["sequential", "indexed"], default = "indexed")
+                        choices = ["sequential", "indexed"],
+                        default = "indexed")
     parser.add_argument("file", help = "Input file.")
 
     args = vars(parser.parse_args())
@@ -76,7 +77,6 @@ potential energy surfaces, but its utility may extend beyond that.
                                      os.path.basename(args["file"]).split('.')))[0]
 
     variables = file_factory.gather_variables(args["file"])
-    print(f"Variables: {[var.name for var in variables]}")
     file_factory.generate_files(args["file"], args["out"], args["prefix"], args["suffix"],
                                 variables, args["numbering"])
 
