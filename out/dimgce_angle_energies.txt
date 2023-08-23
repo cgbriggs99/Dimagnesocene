@@ -1,2 +1,0 @@
-Distance: 32.0, Energy: 0
-Distance: 32.0, Energy: 0

@@ -1,3 +1,0 @@
-Distance: 5.5, Energy: 0
-Distance: 5.833333333333333, Energy: -787.3958930530553
-Distance: 5.5, Energy: 0
