@@ -1,3 +1,47 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.9a1.dev12 
+
+                         Git: Rev {master} 6ebe472 dirty
+
+
+    D. G. A. Smith, L. A. Burns, A. C. Simmonett, R. M. Parrish,
+    M. C. Schieber, R. Galvelis, P. Kraus, H. Kruse, R. Di Remigio,
+    A. Alenaizan, A. M. James, S. Lehtola, J. P. Misiewicz, M. Scheurer,
+    R. A. Shaw, J. B. Schriber, Y. Xie, Z. L. Glick, D. A. Sirianni,
+    J. S. O'Brien, J. M. Waldrop, A. Kumar, E. G. Hohenstein,
+    B. P. Pritchard, B. R. Brooks, H. F. Schaefer III, A. Yu. Sokolov,
+    K. Patkowski, A. E. DePrince III, U. Bozkaya, R. A. King,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, C. D. Sherrill,
+    J. Chem. Phys. 152(18) 184108 (2020). https://doi.org/10.1063/5.0006002
+
+                            Additional Code Authors
+    E. T. Seidl, C. L. Janssen, E. F. Valeev, M. L. Leininger,
+    J. F. Gonthier, R. M. Richard, H. R. McAlexander, M. Saitow, X. Wang,
+    P. Verma, M. H. Lechner, A. Jiang, S. Behnle, A. G. Heide,
+    M. F. Herbst, and D. L. Poole
+
+             Previous Authors, Complete List of Code Contributors,
+                       and Citations for Specific Modules
+    https://github.com/psi4/psi4/blob/master/codemeta.json
+    https://github.com/psi4/psi4/graphs/contributors
+    http://psicode.org/psi4manual/master/introduction.html#citing-psifour
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Wednesday, 23 August 2023 09:39AM
+
+    Process ID: 26428
+    Host:       vlogin2.ccqc.uga.edu
+    PSIDATADIR: /opt/psi/4/1.9a/share/psi4
+    Memory:     500.0 MiB
+    Threads:    1
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
 import os
 
 set reference rhf
@@ -13,7 +57,6 @@ dist_rr = np.linspace(5.5, 7.0, 10)[int(os.environ["SGE_TASK_ID"]) - 1]
 mgcp = geometry(f""" 
     0 1
     symmetry c1
-    units angstrom
 
     C
     C 1 dcc
@@ -56,7 +99,7 @@ set optking {
     ")
 }
 
-energy = optimize("b3lyp/cc-pVTZ")
+energy = 0 # optimize("b3lyp/cc-pVTZ")
 
 mgcp.save_xyz_file("out/structs/dimgce-" + str(os.environ["SGE_TASK_ID"]) + ".xyz", True)
 
@@ -92,3 +135,9 @@ with open(r"out/lock.dimgce_rr_energies.txt", "w+") as _ :
     with open(r"out/dimgce_rr_energies.txt", "a+") as fp :
         print(f"Distance: {dist_rr}, Energy: {energy}", file = fp)
 os.remove(r"out/lock.dimgce_rr_energies.txt")
+--------------------------------------------------------------------------
+
+    Psi4 stopped on: Wednesday, 23 August 2023 09:39AM
+    Psi4 wall time for execution: 0:00:00.05
+
+*** Psi4 exiting successfully. Buy a developer a beer!

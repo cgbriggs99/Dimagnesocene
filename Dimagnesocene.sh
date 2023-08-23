@@ -1,6 +1,6 @@
 #!/bin/sh
 #$ -q gen4.q
-#$ -N dimgcp_mgmg
+#$ -N mgcp_mgmg
 #$ -S /bin/sh
 #$ -cwd
 #$ -t 1-10
@@ -20,7 +20,7 @@ echo "    ID:                "$JOB_ID
 echo "    Hostname:          "$HOSTNAME
 echo "    Working directory: "$SGE_O_WORKDIR
 echo ""
-echo "    Submitted using:   submit --array 1-10 -N dimgcp_mgmg -i in/dimgce_mgmg_pes.in gen4.q psi4@master"
+echo "    Submitted using:   submit --array 1-10 -N mgcp_mgmg -i in/dimgce_mgmg_pes.in gen4.q psi4@master"
 echo "***********************************************************************"
 
 # cd into individual task directory
