@@ -67,8 +67,6 @@ with open("out/structs/dimgce_mgmg-" + str(os.environ["SGE_TASK_ID"]) + ".xyz", 
                 newline += line[i].lower()
             else :
                 newline += line[i]
-        if len(line) > 1 :
-            newline += line[-1]
         fstr += newline
 with open("out/structs/dimgce_mgmg-" + str(os.environ["SGE_TASK_ID"]) + ".xyz", "w") as fp :
     print(fstr, file = fp)

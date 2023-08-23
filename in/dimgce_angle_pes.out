@@ -1,9 +1,9 @@
 
     -----------------------------------------------------------------------
           Psi4: An Open-Source Ab Initio Electronic Structure Package
-                               Psi4 1.9a1.dev12 
+                               Psi4 1.8.1 release
 
-                         Git: Rev {master} 6ebe472 dirty
+                         Git: Rev {} zzzzzzz 
 
 
     D. G. A. Smith, L. A. Burns, A. C. Simmonett, R. M. Parrish,
@@ -31,11 +31,11 @@
     -----------------------------------------------------------------------
 
 
-    Psi4 started on: Wednesday, 23 August 2023 09:35AM
+    Psi4 started on: Wednesday, 23 August 2023 10:36AM
 
-    Process ID: 25584
-    Host:       vlogin2.ccqc.uga.edu
-    PSIDATADIR: /opt/psi/4/1.9a/share/psi4
+    Process ID: 128968
+    Host:       connor-LIFEBOOK-T937
+    PSIDATADIR: /home/connor/miniconda3/envs/p4env/share/psi4
     Memory:     500.0 MiB
     Threads:    1
     
@@ -60,6 +60,7 @@ alpha = angle_param / 180 * math.pi
 mgcp = geometry(f""" 
     0 1
     symmetry c1
+    units angstrom
 
     C
     C 1 dcc
@@ -93,6 +94,9 @@ mgcp = geometry(f"""
 
 # Translate to the center of mass.
 mgcp.move_to_com()
+
+# Change units to Bohr. There seems to be an implicit conversion somewhere.
+mgcp.set_units(psi4.core.Bohr)
 
 # Rotate so that the heavy atoms are on the z axis.
 geo = list(zip([mgcp.symbol(i) for i in range(mgcp.nallatom())], list(mgcp.geometry().to_array())))
@@ -140,7 +144,7 @@ for i in range(len(positions)) :
         positions[i] = np.matmul(rot, positions[i])
 
 # Generate new geometry.
-geostr = "0 1\nsymmetry c1\n"
+geostr = "0 1\nsymmetry c1\nunits angstrom\n"
 
 for i in range(len(positions)) :
     geostr += f"{mgcp.symbol(i)} {positions[i].item(0)} {positions[i].item(1)} {positions[i].item(2)}\n"
@@ -173,8 +177,6 @@ with open("out/structs/dimgce_angle-" + str(os.environ["SGE_TASK_ID"]) + ".xyz",
                 newline += line[i].lower()
             else :
                 newline += line[i]
-        if len(line) > 1 :
-            newline += line[-1]
         fstr += newline
 with open("out/structs/dimgce_angle-" + str(os.environ["SGE_TASK_ID"]) + ".xyz", "w") as fp :
     print(fstr, file = fp)
@@ -195,3 +197,8 @@ with open("out/lock.dimgce_angle_energies.txt", "w+") as _ :
         print(f"Distance: {angle_param}, Energy: {energy}", file = fp)
 os.remove("out/lock.dimgce_angle_energies.txt")
 --------------------------------------------------------------------------
+
+    Psi4 stopped on: Wednesday, 23 August 2023 10:36AM
+    Psi4 wall time for execution: 0:00:00.04
+
+*** Psi4 exiting successfully. Buy a developer a beer!
