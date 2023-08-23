@@ -46,11 +46,11 @@ methods = ["hf", "mp2", "b3lyp", "b97-1", "pw6b95", "cisd", "ccsd"]
 basis = "cc-pDZ"
 method = methods[int(os.environ["SGE_TASK_ID"])]
 # First test, energies.
-en = 0 # energy(method + "/" + basis)
+en = energy(method + "/" + basis)
 ideal_en = -416.31749560
 
 # Second test, optimized structure.
-#optimize(method + "/" + basis)
+optimize(method + "/" + basis)
 
 # Find the bond lengths. Set to bohr to fix units.
 becp.set_units(psi4.core.Bohr)
