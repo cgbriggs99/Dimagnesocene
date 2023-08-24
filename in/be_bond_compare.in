@@ -7,7 +7,7 @@ import pickle
 
 becp = geometry("""
 0 1
-symmetry c1
+symmetry c2v
 
 Be 6.07874 2.45740 2.20602
 Be 7.89690 2.43374 3.14396
@@ -43,7 +43,7 @@ becp.set_units(psi4.core.Angstrom)
 
 methods = ["hf", "mp2", "b3lyp", "b97-1", "pw6b95", "cisd", "ccsd", "dsd-b3lyp-d3bj"]
 
-basis = "cc-pDZ"
+basis = "cc-pVDZ"
 method = methods[int(os.environ["SGE_TASK_ID"]) - 1]
 # First test, energies.
 start_time = time.time()
@@ -53,15 +53,8 @@ ideal_en = -416.31749560
 # Second test, optimized structure.
 try :
     optimize(method + "/" + basis)
-except Exception as e :
+except psi4.driver.p4util.OptimizationConvergenceError as e :
     task_id = os.environ["SGE_TASK_ID"]
-    while os.path.isfile("out/lock.methods.txt") :
-        time.sleep(0.3)
-    
-    with open("out/lock.methods.txt", "w+") as _ :
-        with open("out/lock.methods.txt", "a+") as fp :
-            print(f"Method {method}/{basis} did not converge!", file = fp)
-    os.remove("out/lock.methods.txt")
     os.rename("in/be_bond_compare.out", f"out/be_bond_compare-{task_id}.out")
     raise e
 
