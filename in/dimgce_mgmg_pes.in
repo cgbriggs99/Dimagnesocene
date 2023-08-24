@@ -10,6 +10,7 @@ print(os.environ["SGE_TASK_ID"])
 
 dist_mgmg = np.linspace(1.9, 3.5, 10)[int(os.environ["SGE_TASK_ID"]) - 1]
 
+
 mgcp = geometry(f""" 
     0 1
     symmetry c1
@@ -38,11 +39,11 @@ mgcp = geometry(f"""
     Mg 1 dcbe 11 achbe 6 0
     Mg 6 dcbe 16 achbe 1 0
 
-    dcc = 1.33
-    drr = {dist_mgmg + 2 * 1.882}
-    dch = 1.088
-    dcbe = 2.234
-    achbe = 128.09
+    dcc = 1.40748
+    drr = {dist_mgmg + 2 * 1.881055}
+    dch = 1.07749
+    dcbe = 2.23403
+    achbe = 128.09660
 
 """)
 
@@ -52,7 +53,7 @@ set optking {
     ")
 }
 
-energy = optimize("b3lyp/cc-pVTZ")
+energy = optimize("mp2/cc-pVDZ")
 
 mgcp.save_xyz_file("out/structs/dimgce_mgmg-" + str(os.environ["SGE_TASK_ID"]) + ".xyz", True)
 

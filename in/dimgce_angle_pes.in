@@ -118,7 +118,7 @@ set optking {
     ")
 }
 
-energy = optimize("b3lyp/cc-pVTZ")
+energy = optimize("mp2/cc-pVDZ")
 
 mgcp.save_xyz_file("out/structs/dimgce_angle-" + str(os.environ["SGE_TASK_ID"]) + ".xyz", True)
 

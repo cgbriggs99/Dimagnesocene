@@ -1,0 +1,150 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.9a1.dev12 
+
+                         Git: Rev {master} 6ebe472 dirty
+
+
+    D. G. A. Smith, L. A. Burns, A. C. Simmonett, R. M. Parrish,
+    M. C. Schieber, R. Galvelis, P. Kraus, H. Kruse, R. Di Remigio,
+    A. Alenaizan, A. M. James, S. Lehtola, J. P. Misiewicz, M. Scheurer,
+    R. A. Shaw, J. B. Schriber, Y. Xie, Z. L. Glick, D. A. Sirianni,
+    J. S. O'Brien, J. M. Waldrop, A. Kumar, E. G. Hohenstein,
+    B. P. Pritchard, B. R. Brooks, H. F. Schaefer III, A. Yu. Sokolov,
+    K. Patkowski, A. E. DePrince III, U. Bozkaya, R. A. King,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, C. D. Sherrill,
+    J. Chem. Phys. 152(18) 184108 (2020). https://doi.org/10.1063/5.0006002
+
+                            Additional Code Authors
+    E. T. Seidl, C. L. Janssen, E. F. Valeev, M. L. Leininger,
+    J. F. Gonthier, R. M. Richard, H. R. McAlexander, M. Saitow, X. Wang,
+    P. Verma, M. H. Lechner, A. Jiang, S. Behnle, A. G. Heide,
+    M. F. Herbst, and D. L. Poole
+
+             Previous Authors, Complete List of Code Contributors,
+                       and Citations for Specific Modules
+    https://github.com/psi4/psi4/blob/master/codemeta.json
+    https://github.com/psi4/psi4/graphs/contributors
+    http://psicode.org/psi4manual/master/introduction.html#citing-psifour
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Thursday, 24 August 2023 01:38AM
+
+    Process ID: 21411
+    Host:       n023
+    PSIDATADIR: /opt/psi/4/1.9a/share/psi4
+    Memory:     500.0 MiB
+    Threads:    4
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+import math
+import os
+import time
+import pickle
+
+# Minimal geometry from experiment.
+
+becp = geometry("""
+0 1
+symmetry c1
+
+Be 6.07874 2.45740 2.20602
+Be 7.89690 2.43374 3.14396
+C 8.72687 2.56070 4.91891
+H 8.17652 2.68889 5.84031
+C 9.17774 3.60056 4.06841
+H 9.03081 4.65933 4.22871
+C 9.76230 3.00649 2.92240
+H 10.13855 3.53358 2.05701
+C 9.67272 1.59945 3.06466
+H 9.96894 0.86746 2.32660
+C 9.03279 1.32392 4.29858
+H 8.75633 0.34533 4.66493
+C 5.19099 3.05518 0.55978
+H 5.69006 3.57212 -0.24768
+C 5.09296 1.64977 0.71226
+H 5.50429 0.90896 0.04123
+C 4.45261 1.38708 1.94876
+H 4.29105 0.41114 2.38432
+C 4.15477 2.63011 2.56046
+H 3.72671 2.76661 3.54352
+C 4.61116 3.66102 1.70205
+H 4.59148 4.72016 1.91681
+""")
+
+# Convert to bohr first. This fixes unit issues that Psi4 seems to have.
+becp.set_units(psi4.core.Bohr)
+ideal_bebe = becp.xyz(0).distance(becp.xyz(1))
+ideal_bec = min(becp.xyz(0).distance(becp.xyz(2)),
+                becp.xyz(1).distance(becp.xyz(2)))
+# Convert back.
+becp.set_units(psi4.core.Angstrom)
+
+methods = ["hf", "mp2", "b3lyp", "b97-1", "pw6b95", "cisd", "ccsd", "dsd-b3lyp-d3bj"]
+
+basis = "cc-pDZ"
+method = methods[int(os.environ["SGE_TASK_ID"]) - 1]
+# First test, energies.
+start_time = time.time()
+en = energy(method + "/" + basis)
+ideal_en = -416.31749560
+
+# Second test, optimized structure.
+try :
+    optimize(method + "/" + basis)
+except Exception as e :
+    os.rename("in/be_bond_compare.out", f"out/be_bond_compare-{os.environ["SGE_TASK_ID"]}.out")
+    raise e
+
+end_time = time.time()
+
+# Find the bond lengths. Set to bohr to fix units.
+becp.set_units(psi4.core.Bohr)
+bebe = becp.xyz(0).distance(becp.xyz(1))
+bec = min(becp.xyz(0).distance(becp.xyz(2)),
+          becp.xyz(1).distance(becp.xyz(2)))
+
+# Report these in a file, along with their differences.
+while os.path.isfile("out/lock.methods.dat") :
+    time.sleep(0.3)
+
+# Obtain a lock and write lines to file.
+with open("out/lock.methods.dat", "w+") as _ :
+    with open("out/methods.dat", "ba+") as fp :
+        fp.write(pickle.dumps([en, bebe, bec,
+                               en - ideal_en, bebe - ideal_bebe,
+                               bec - ideal_bec, end_time - start_time, method]))
+        fp.write(b'\n')
+# Release the lock.        
+os.remove("out/lock.methods.dat")
+        
+
+--------------------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
+    exec(content)
+
+  File "<string>", line 62
+    os.rename("in/be_bond_compare.out", f"out/be_bond_compare-{os.environ["SGE_TASK_ID"]}.out")
+                                                                           ^^^^^^^^^^^
+SyntaxError: f-string: unmatched '['
+
+
+
+!--------------------------------!
+!                                !
+!  f-string: unmatched '['       !
+!                                !
+!--------------------------------!
+
+    Psi4 stopped on: Thursday, 24 August 2023 01:38AM
+    Psi4 wall time for execution: 0:00:00.00
+
+*** Psi4 encountered an error. Buy a developer more coffee!
+*** Resources and help at github.com/psi4/psi4.

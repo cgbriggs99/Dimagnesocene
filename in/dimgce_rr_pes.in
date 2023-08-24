@@ -9,6 +9,9 @@ import time
 print(os.environ["SGE_TASK_ID"])
 
 dist_rr = np.linspace(5.5, 7.0, 10)[int(os.environ["SGE_TASK_ID"]) - 1]
+radius = 1.40748 / (2 * math.sin(math.pi / 5))
+angle_hcmg = 180 - 180 / math.pi * math.atan2((dist_rr - 2.35580) / 2, radius)
+dist_cmg = math.hypot(radius, (dist_rr - 2.35580) / 2)
 
 mgcp = geometry(f""" 
     0 1
@@ -38,25 +41,21 @@ mgcp = geometry(f"""
     Mg 1 dcbe 11 achbe 6 0
     Mg 6 dcbe 16 achbe 1 0
 
-    dcc = 1.33
+    dcc = 1.40748
     drr = {dist_rr}
-    dch = 1.088
-    dcbe = 1.930
-    achbe = 128.09
+    dch = 1.07749
+    dcbe = {dist_cmg}
+    achbe = {angle_hcmg}
 
 """)
 
 set optking {
     frozen_distance = ("
         1 6
-        2 7
-        3 8
-        4 9
-        5 10
     ")
 }
 
-energy = optimize("b3lyp/cc-pVTZ")
+energy = optimize("mp2/cc-pVDZ")
 
 mgcp.save_xyz_file("out/structs/dimgce-" + str(os.environ["SGE_TASK_ID"]) + ".xyz", True)
 

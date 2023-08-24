@@ -51,7 +51,20 @@ en = energy(method + "/" + basis)
 ideal_en = -416.31749560
 
 # Second test, optimized structure.
-optimize(method + "/" + basis)
+try :
+    optimize(method + "/" + basis)
+except Exception as e :
+    task_id = os.environ["SGE_TASK_ID"]
+    while os.path.isfile("out/lock.methods.txt") :
+        time.sleep(0.3)
+    
+    with open("out/lock.methods.txt", "w+") as _ :
+        with open("out/lock.methods.txt", "a+") as fp :
+            print(f"Method {method}/{basis} did not converge!", file = fp)
+    os.remove("out/lock.methods.txt")
+    os.rename("in/be_bond_compare.out", f"out/be_bond_compare-{task_id}.out")
+    raise e
+
 end_time = time.time()
 
 # Find the bond lengths. Set to bohr to fix units.
