@@ -1,0 +1,61 @@
+
+***********************************************************************
+ Starting job:
+
+    Name:              be_methods
+    ID:                930034
+    Hostname:          n021
+    Working directory: /home/vulcan/cgb31826/git/Dimagnesocene
+
+    Submitted using:   submit --array 1-8 -N be_methods -i in/be_bond_compare.in -o in/be_bond_compare.out gen4.q psi4@master
+***********************************************************************
+module load  psi4-master-intel-16.0.1-avducsgnonqrcpftiesq432gagal6y7r
+Traceback (most recent call last):
+  File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
+    exec(content)
+  File "<string>", line 22, in <module>
+  File "/opt/psi/4/1.9a/lib/psi4/driver/molutil.py", line 267, in geometry
+    molecule = core.Molecule.from_dict(molrec['qm'])
+
+RuntimeError: 
+Fatal Error: User specified point group (C2v(Z)) is not a subgroup of the highest detected point group (C1). If this is because the symmetry increased, try to start the calculation again from the last geometry, after checking any symmetry-dependent input, such as DOCC.
+Error occurred in file: /tmp/psi4/psi4/src/psi4/libmints/molecule.cc on line: 2011
+The most recent 5 function calls were:
+
+psi::PsiException::PsiException(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char const*, int)
+psi::Molecule::find_point_group(double) const
+psi::Molecule::update_geometry()
+from_dict(pybind11::dict)
+
+
+Printing out the relevant lines from the Psithon --> Python processed input file:
+    ""","blank_molecule_psi4_yo")
+    import math
+    import os
+    import time
+    import pickle
+--> becp = geometry("""
+    0 1
+    symmetry c2v
+    Be 6.07874 2.45740 2.20602
+    Be 7.89690 2.43374 3.14396
+    C 8.72687 2.56070 4.91891
+
+
+!----------------------------------------------------------------------------------!
+!                                                                                  !
+! Fatal Error: User specified point group (C2v(Z)) is not a subgroup of the        !
+!     highest detected point group (C1). If this is because the symmetry           !
+!     increased, try to start the calculation again from the last geometry, after  !
+!     checking any symmetry-dependent input, such as DOCC.                         !
+! Error occurred in file: /tmp/psi4/psi4/src/psi4/libmints/molecule.cc on line:    !
+!     2011                                                                         !
+! The most recent 5 function calls were:                                           !
+! psi::PsiException::PsiException(std::__cxx11::basic_string<char,                 !
+!     std::char_traits<char>, std::allocator<char> >, char const*, int)            !
+! psi::Molecule::find_point_group(double) const                                    !
+! psi::Molecule::update_geometry()                                                 !
+! from_dict(pybind11::dict)                                                        !
+!                                                                                  !
+!----------------------------------------------------------------------------------!
+
