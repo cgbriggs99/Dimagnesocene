@@ -3,7 +3,7 @@
 #$ -N method_compare
 #$ -S /bin/sh
 #$ -cwd
-#$ -t 1-8
+#$ -t 1-64
 #$ -tc 4
 
 . /etc/profile.d/modules.sh
@@ -20,7 +20,7 @@ echo "    ID:                "$JOB_ID
 echo "    Hostname:          "$HOSTNAME
 echo "    Working directory: "$SGE_O_WORKDIR
 echo ""
-echo "    Submitted using:   submit --array 1-8 -N method_compare -i in/be_bond_compare.in -o in/be_bond_compare.out gen4.q psi4@master"
+echo "    Submitted using:   submit --array 1-64 -N method_compare -i in/be_bond_compare.in -o in/be_bond_compare.out gen4.q psi4@master"
 echo "***********************************************************************"
 
 # cd into individual task directory

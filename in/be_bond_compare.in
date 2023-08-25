@@ -2,6 +2,7 @@ import math
 import os
 import time
 import pickle
+import numpy as np
 
 file_name = "methods"
 job_id = os.environ["JOB_ID"]
@@ -45,9 +46,10 @@ ideal_bec = min(becp.xyz(0).distance(becp.xyz(2)),
 becp.set_units(psi4.core.Angstrom)
 
 methods = ["hf", "mp2", "b3lyp", "b97-1", "pw6b95", "cisd", "ccsd", "dsd-b3lyp-d3bj"]
+basis_sets = ["cc-pVDZ", "aug-cc-pVDZ", "pcsseg-3", "aug-pcsseg-3", "aug-pcsseg-4", "cc-pVTZ", "def2-tzvp", "sad-fit"]
 
-basis = "cc-pVDZ"
-method = methods[int(os.environ["SGE_TASK_ID"]) - 1]
+basis = basis_sets[(int(os.environ["SGE_TASK_ID"]) - 1) % len(basis_sets)]
+method = methods[(int(os.environ["SGE_TASK_ID"]) - 1) // len(basis_sets)]
 # First test, energies.
 start_time = time.time()
 en = energy(method + "/" + basis)
@@ -83,7 +85,7 @@ with open(dat_lock, "w+") as _ :
     with open(dat_file, "ba+") as fp :
         fp.write(pickle.dumps([en, bebe, bec,
                                en - ideal_en, bebe - ideal_bebe,
-                               bec - ideal_bec, end_time - start_time, method]))
+                               bec - ideal_bec, end_time - start_time, method, basis]))
         fp.write(b'\n')
 # Release the lock.        
 os.remove(dat_lock)
@@ -95,7 +97,7 @@ while os.path.isfile(txt_lock) :
 
 with open(txt_lock, "w+") as _ :
     with open(txt_file, "ba+) as fp :
-        print(f"Method: {method}, Energy: {en}, Be-Be Distance: {bebe}, Be-C Distance: {bec}", file = fp)
+        print(f"Method: {method}, Basis: {basis}, Energy: {en}, Be-Be Distance: {bebe}, Be-C Distance: {bec}", file = fp)
         print(f"Energy Error: {en - ideal_en}, Be-Be Error: {bebe - ideal_bebe}, Be-C Error: {bec - ideal_bec}, Runtime: {end_time - start_time}", file = fp)
 
 os.remove(txt_lock)
