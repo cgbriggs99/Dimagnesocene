@@ -1,9 +1,9 @@
 #!/bin/sh
 #$ -q gen4.q
-#$ -N dimgce_angle
+#$ -N method_compare
 #$ -S /bin/sh
 #$ -cwd
-#$ -t 1:10
+#$ -t 1-8
 #$ -tc 4
 
 . /etc/profile.d/modules.sh
@@ -20,7 +20,7 @@ echo "    ID:                "$JOB_ID
 echo "    Hostname:          "$HOSTNAME
 echo "    Working directory: "$SGE_O_WORKDIR
 echo ""
-echo "    Submitted using:   submit -N dimgce_angle --array 1:10 -i in/dimgce_mgmg_pes.in -o in/dimgce_mgmg_pes.out gen4.q psi4@master"
+echo "    Submitted using:   submit --array 1-8 -N method_compare -i in/be_bond_compare.in -o in/be_bond_compare.out gen4.q psi4@master"
 echo "***********************************************************************"
 
 # cd into individual task directory
@@ -32,5 +32,5 @@ vulcan load psi4@master~ambit~chemps2~debug~pcmsolver~vectorization
 export PSI_SCRATCH=$TMPDIR
 export KMP_DUPLICATE_LIB_OK=TRUE
 
-psi4 -n 4 -i in/dimgce_mgmg_pes.in -o in/dimgce_mgmg_pes.out
+psi4 -n 4 -i in/be_bond_compare.in -o in/be_bond_compare.out
 
