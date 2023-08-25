@@ -3,6 +3,9 @@ import os
 import time
 import pickle
 
+file_name = "methods"
+job_id = os.environ["JOB_ID"]
+
 # Minimal geometry from experiment.
 
 becp = geometry("""
@@ -66,18 +69,34 @@ bebe = becp.xyz(0).distance(becp.xyz(1))
 bec = min(becp.xyz(0).distance(becp.xyz(2)),
           becp.xyz(1).distance(becp.xyz(2)))
 
+dat_file = f"out/methods-{job_id}.dat"
+txt_file = f"out/methods-{job_id}.txt"
+dat_lock = f"out/lock.methods-{job_id}.dat"
+txt_lock = f"out/lock.methods-{job_id}.txt"
+
 # Report these in a file, along with their differences.
-while os.path.isfile("out/lock.methods.dat") :
+while os.path.isfile(dat_lock) :
     time.sleep(0.3)
 
 # Obtain a lock and write lines to file.
-with open("out/lock.methods.dat", "w+") as _ :
-    with open("out/methods.dat", "ba+") as fp :
+with open(dat_lock, "w+") as _ :
+    with open(dat_file, "ba+") as fp :
         fp.write(pickle.dumps([en, bebe, bec,
                                en - ideal_en, bebe - ideal_bebe,
                                bec - ideal_bec, end_time - start_time, method]))
         fp.write(b'\n')
 # Release the lock.        
-os.remove("out/lock.methods.dat")
+os.remove(dat_lock)
         
 
+# Make the human readable output, since I seem to have forgotten.
+while os.path.isfile(txt_lock) :
+    time.sleep(0.3)
+
+with open(txt_lock, "w+") as _ :
+    with open(txt_file, "ba+) as fp :
+        print(f"Method: {method}, Energy: {en}, Be-Be Distance: {bebe}, Be-C Distance: {bec}", file = fp)
+        print(f"Energy Error: {en - ideal_en}, Be-Be Error: {bebe - ideal_bebe}, Be-C Error: {bec - ideal_bec}, Runtime: {end_time - start_time}", file = fp)
+
+os.remove(txt_lock)
+        
