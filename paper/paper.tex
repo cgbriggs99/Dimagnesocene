@@ -1,0 +1,38 @@
+\documentclass[journal=jpcafh, manuscript=article]{achemso}
+
+\usepackage{achemso}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{chemformula}
+
+\author{Connor G. Briggs}
+\email{Connor.Briggs@uga.edu}
+\author{Stephen M. Goodlett}
+\author{Henry F. Schaefer III}
+\affiliation{Department of Chemistry and Center for Computational Quantum Chemistry, University of Georgia, Athens, GA, USA}
+
+\title{Theoretical Computations on Sandwiched Group 2 Dimers}
+
+\begin{document}
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction}
+
+The recent discovery of diberyllocene~\cite{boronski_diberyllocene_2023} has sparked much interest in the possibility of synthesizing analogues using heavier group 2 metals. Of key interest is dimagnesocene, the next heaviest compound in the series. Dimeric complexes of magnesium have been discovered previously~\cite{stasch_stable_2011,green_stable_2007}, so it is likely possible to synthesize dimagnesocene. Previous theoretical work on dimagnesocene and diberyllocene have focused on using density-functional theory for computations~\cite{xie_characteristics_2005}, but with more recent hardware, these same calculations can be done with larger basis sets and more accurate methods.
+
+\section{Theoretical Methods}
+
+One goal of this study is to expand on the properties computed by others. In the original study~\cite{xie_characteristics_2005}, the equilibrium geometries, vibrational frequencies, and bond orders were obtained. When analyzing diberyllocene, Boronski, Crumpton, Wales, and Aldridge used several other properties to make certain that they synthesized diberyllocene, including NMR shifts. Therefore, it might be useful for the synthesis and characterization of these heavier compounds to have the values for the \ch{^1H} and \ch{^{13}C} NMR shifts.
+
+Many of the initial optimizations and energy calculations were performed using Psi4. However, as Psi4 lacks many of the methods to compute NMR shifts and relativistic corrections, final calculations were performed using CFOUR~\cite{cfour}.
+
+First, a comparison between several methods and basis sets was carried out on the geometry of diberyllocene to select the combinations that best calculate the energy, and which predicted the equilibrium geometry best. The methods chosen were ...
+
+After this, the equilibrium geometries of the compounds were found. The eclipsed and gauche configurations for the rings were also optimized so that the energy difference could be found. These geometries were then passed on to CFOUR for further calculations.
+
+\bibliography{dimagnesocene}
+
+\end{document}

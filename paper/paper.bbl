@@ -1,0 +1,88 @@
+\providecommand{\latin}[1]{#1}
+\makeatletter
+\providecommand{\doi}
+  {\begingroup\let\do\@makeother\dospecials
+  \catcode`\{=1 \catcode`\}=2 \doi@aux}
+\providecommand{\doi@aux}[1]{\endgroup\texttt{#1}}
+\makeatother
+\providecommand*\mcitethebibliography{\thebibliography}
+\csname @ifundefined\endcsname{endmcitethebibliography}
+  {\let\endmcitethebibliography\endthebibliography}{}
+\begin{mcitethebibliography}{6}
+\providecommand*\natexlab[1]{#1}
+\providecommand*\mciteSetBstSublistMode[1]{}
+\providecommand*\mciteSetBstMaxWidthForm[2]{}
+\providecommand*\mciteBstWouldAddEndPuncttrue
+  {\def\EndOfBibitem{\unskip.}}
+\providecommand*\mciteBstWouldAddEndPunctfalse
+  {\let\EndOfBibitem\relax}
+\providecommand*\mciteSetBstMidEndSepPunct[3]{}
+\providecommand*\mciteSetBstSublistLabelBeginEnd[3]{}
+\providecommand*\EndOfBibitem{}
+\mciteSetBstSublistMode{f}
+\mciteSetBstMaxWidthForm{subitem}{(\alph{mcitesubitemcount})}
+\mciteSetBstSublistLabelBeginEnd
+  {\mcitemaxwidthsubitemform\space}
+  {\relax}
+  {\relax}
+
+\bibitem[Boronski \latin{et~al.}()Boronski, Crumpton, Wales, and
+  Aldridge]{boronski_diberyllocene_2023}
+Boronski,~J.~T.; Crumpton,~A.~E.; Wales,~L.~L.; Aldridge,~S. Diberyllocene, a
+  stable compound of Be(I) with a Be–Be bond. \emph{380}, 1147--1149,
+  Publisher: American Association for the Advancement of Science\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Stasch and Jones()Stasch, and Jones]{stasch_stable_2011}
+Stasch,~A.; Jones,~C. Stable dimeric magnesium ( i ) compounds: from chemical
+  landmarks to versatile reagents. \emph{40}, 5659--5672, Publisher: Royal
+  Society of Chemistry\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Green \latin{et~al.}()Green, Jones, and Stasch]{green_stable_2007}
+Green,~S.~P.; Jones,~C.; Stasch,~A. Stable Magnesium(I) Compounds with Mg-Mg
+  Bonds. \emph{318}, 1754--1757, Publisher: American Association for the
+  Advancement of Science\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Xie \latin{et~al.}()Xie, Schaefer, and
+  Jemmis]{xie_characteristics_2005}
+Xie,~Y.; Schaefer,~H.~F.; Jemmis,~E.~D. Characteristics of novel sandwiched
+  beryllium, magnesium, and calcium dimers: C5H5BeBeC5H5, C5H5MgMgC5H5, and
+  C5H5CaCaC5H5. \emph{402}, 414--421\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Stanton \latin{et~al.}()Stanton, Gauss, Cheng, Harding, Matthews, and
+  Szalay]{cfour}
+Stanton,~J.~F.; Gauss,~J.; Cheng,~L.; Harding,~M.~E.; Matthews,~D.~A.;
+  Szalay,~P.~G. {CFOUR, Coupled-Cluster techniques for Computational Chemistry,
+  a quantum-chemical program package}. {W}ith contributions from {A}.
+  {A}sthana, {A}.{A}. {A}uer, {R}.{J}. {B}artlett, {U}. {B}enedikt, {C}.
+  {B}erger, {D}.{E}. {B}ernholdt, {S}. {B}laschke, {Y}. {J}. {B}omble, {S}.
+  {B}urger, {O}. {C}hristiansen, {D}. {D}atta, {F}. {E}ngel, {R}. {F}aber, {J}.
+  {G}reiner, {M}. {H}eckert, {O}. {H}eun, {M}. Hilgenberg, {C}. {H}uber,
+  {T}.-{C}. {J}agau, {D}. {J}onsson, {J}. {J}us{\'e}lius, {T}. Kirsch,
+  {M}.-{P}. {K}itsaras, {K}. {K}lein, {G}.{M}. {K}opper, {W}.{J}. {L}auderdale,
+  {F}. {L}ipparini, {J}. {L}iu, {T}. {M}etzroth, {L}.{A}. {M}{\"u}ck, {D}.{P}.
+  {O}'{N}eill, {T}. {N}ottoli, {J}. {O}swald, {D}.{R}. {P}rice, {E}.
+  {P}rochnow, {C}. {P}uzzarini, {K}. {R}uud, {F}. {S}chiffmann, {W}.
+  {S}chwalbach, {C}. {S}immons, {S}. {S}topkowicz, {A}. {T}ajti, {T.} Uhlirova,
+  {J}. {V}{\'a}zquez, {F}. {W}ang, {J}.{D}. {W}atts, {P.} Yerg{\"u}n. {C}.
+  {Z}hang, {X}. {Z}heng, and the integral packages {MOLECULE} ({J}.
+  {A}lml{\"o}f and {P}.{R}. {T}aylor), {PROPS} ({P}.{R}. {T}aylor), {ABACUS}
+  ({T}. {H}elgaker, {H}.{J}. {A}a. {J}ensen, {P}. {J}{\o}rgensen, and {J}.
+  {O}lsen), and {ECP} routines by {A}. {V}. {M}itin and {C}. van {W}{\"u}llen.
+  {F}or the current version, see http://www.cfour.de.\relax
+\mciteBstWouldAddEndPunctfalse
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\end{mcitethebibliography}
