@@ -4,7 +4,7 @@
 
     Name:              method_compare
     ID:                931330
-    Hostname:          n039
+    Hostname:          n022
     Working directory: /home/vulcan/cgb31826/git/Dimagnesocene
 
     Submitted using:   submit --array 1-64 -N method_compare -i in/be_bond_compare.in -o in/be_bond_compare.out gen4.q psi4@master
