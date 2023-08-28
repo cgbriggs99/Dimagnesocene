@@ -96,7 +96,7 @@ while os.path.isfile(txt_lock) :
     time.sleep(0.3)
 
 with open(txt_lock, "w+") as _ :
-    with open(txt_file, "ba+) as fp :
+    with open(txt_file, "a+") as fp :
         print(f"Method: {method}, Basis: {basis}, Energy: {en}, Be-Be Distance: {bebe}, Be-C Distance: {bec}", file = fp)
         print(f"Energy Error: {en - ideal_en}, Be-Be Error: {bebe - ideal_bebe}, Be-C Error: {bec - ideal_bec}, Runtime: {end_time - start_time}", file = fp)
 
