@@ -37,27 +37,6 @@ molecule becp {
 
 }
 
-do_opt = True
-
-try :
-    geostr = "0 1\n"
-    with open("dimagnesocene.xyz", "r") as fp :
-        _ = next(fp)
-        for line in fp :
-            geostr += line
-        becp = geometry(geostr)
-    do_opt = False
-except Exception as e :
-    pass
-
-#methods = ["mp2/def2-tzvp"]
-
-retcode = None
-
-optimized = False
-E = None
-wfn = None
-
 set optking {
     frozen_bend = ("
         1 2 3
@@ -83,33 +62,24 @@ set optking {
     ")
 }
 
-try :
-    E, wfn = optimize("mp2/aug-cc-pVDZ", return_wfn = True)
-    optimized = True
-    do_opt = True
-    
-    
-except Exception as e :
-    retcode = e
+optimize("mp2/aug-cc-pVDZ")
+E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
 
-fchk(wfn, "dimagnesocene.fchk")
+fchk(wfn, "out/dimagnesocene.fchk")
 
-if do_opt and optimized :
-    becp.save_xyz_file("dimagnesocene.xyz", True)
+becp.save_xyz_file("out/dimagnesocene.xyz", True)
 
-    fstr = ""
-    with open("dimagnesocene.xyz", "r") as fp :
-        for line in fp :
-            newline = line[0]
-            for i in range(1, len(line)) :
-                if line[i - 1].isupper() and line[i].isupper() :
-                    newline += line[i].lower()
-                else :
-                    newline += line[i]
-            fstr += newline
+fstr = ""
+with open("out/dimagnesocene.xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
 
-    with open("dimagnesocene.xyz", "w") as fp :
-        print(fstr, file = fp)
+with open("out/dimagnesocene.xyz", "w") as fp :
+    print(fstr, file = fp)
 
-if retcode is not None :
-    raise retcode
