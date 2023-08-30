@@ -63,7 +63,7 @@ set optking {
     ")
 }
 
-#optimize("mp2/aug-cc-pVDZ")
+optimize("mp2/aug-cc-pVDZ")
 E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
 
 becp.save_xyz_file("out/dimagnesocene.xyz", True)
