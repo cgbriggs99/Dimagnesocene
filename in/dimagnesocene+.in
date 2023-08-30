@@ -66,7 +66,6 @@ set optking {
 optimize("mp2/aug-cc-pVDZ")
 E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
 
-fchk(wfn, "out/dimagnesocene+.fchk")
 
 becp.save_xyz_file("out/dimagnesocene+.xyz", True)
 
@@ -84,3 +83,5 @@ with open("out/dimagnesocene+.xyz", "r") as fp :
 with open("out/dimagnesocene+.xyz", "w") as fp :
     print(fstr, file = fp)
 
+wfn.to_file("out/dimagnesocene+.wf")
+fchk(wfn, "out/dimagnesocene+.fchk")

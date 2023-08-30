@@ -37,35 +37,8 @@ molecule becp {
 
 }
 
-set optking {
-    frozen_bend = ("
-        1 2 3
-        2 3 4
-        3 4 5
-        4 5 1
-        5 1 2
-        6 7 8
-        7 8 9
-        8 9 10
-        9 10 6
-        10 6 7
-        11 1 2
-        12 2 3
-        13 3 4
-        14 4 5
-        15 5 1
-        16 6 7
-        17 7 8
-        18 8 9
-        19 9 10
-        20 10 6
-    ")
-}
-
 optimize("mp2/aug-cc-pVDZ")
 E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
-
-fchk(wfn, "out/dimagnesocene-.fchk")
 
 becp.save_xyz_file("out/dimagnesocene-.xyz", True)
 
@@ -83,3 +56,5 @@ with open("out/dimagnesocene-.xyz", "r") as fp :
 with open("out/dimagnesocene-.xyz", "w") as fp :
     print(fstr, file = fp)
 
+wfn.to_file("out/dimagnesocene-.wf")
+fchk(wfn, "out/dimagnesocene-.fchk")

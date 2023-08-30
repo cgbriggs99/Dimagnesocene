@@ -10,3 +10,43 @@
     Submitted using:   submit -N dimgcp+ -i in/dimagnesocene+.in -o out/dimagnesocene+.out gen4.q,gen6.q psi4@master
 ***********************************************************************
 module load  psi4-master-intel-16.0.1-avducsgnonqrcpftiesq432gagal6y7r
+Optimizer: Optimization complete!
+
+QcdbException: Orbital basis argument must not be empty.
+
+
+Traceback (most recent call last):
+  File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
+    exec(content)
+  File "<string>", line 55, in <module>
+  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 1870, in fchk
+    wfn_ = core.Wavefunction.build(wfn.molecule(), core.get_global_option('BASIS'))
+  File "/opt/psi/4/1.9a/lib/psi4/driver/p4util/python_helpers.py", line 219, in _core_wavefunction_build
+    basis = core.BasisSet.build(mol, "ORBITAL", basis, quiet=quiet)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/p4util/python_helpers.py", line 159, in _pybuild_basis
+    bs, basisdict = qcdb.BasisSet.pyconstruct(mol.to_dict(),
+  File "/opt/psi/4/1.9a/lib/psi4/driver/qcdb/libmintsbasisset.py", line 667, in pyconstruct
+    raise ValidationError("""Orbital basis argument must not be empty.""")
+
+psi4.driver.qcdb.exceptions.ValidationError: Orbital basis argument must not be empty.
+
+Printing out the relevant lines from the Psithon --> Python processed input file:
+    ""","becp")
+    core.IO.set_default_namespace("becp")
+    core.set_local_option("OPTKING", "FROZEN_BEND", "(""        1 2 3        2 3 4        3 4 5        4 5 1        5 1 2        6 7 8        7 8 9        8 9 10        9 10 6        10 6 7        11 1 2        12 2 3        13 3 4        14 4 5        15 5 1        16 6 7        17 7 8        18 8 9        19 9 10        20 10 6    "")")
+    optimize("mp2/aug-cc-pVDZ")
+    E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
+--> fchk(wfn, "out/dimagnesocene+.fchk")
+    becp.save_xyz_file("out/dimagnesocene+.xyz", True)
+    fstr = ""
+    with open("out/dimagnesocene+.xyz", "r") as fp :
+        for line in fp :
+            newline = line[0]
+
+
+!--------------------------------------------!
+!                                            !
+!  Orbital basis argument must not be empty. !
+!                                            !
+!--------------------------------------------!
+
