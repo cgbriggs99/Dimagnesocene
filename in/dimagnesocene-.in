@@ -31,9 +31,11 @@ molecule becp {
 }
 
 set OPT_TYPE TS
+set GEOM_MAXITER 150
+set SCF_TYPE OUT_OF_CORE
 
-optimize("mp2/aug-cc-pVDZ")
-E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
+optimize("ccsd/aug-cc-pVTZ")
+E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
 
 becp.save_xyz_file("out/dimagnesocene-.xyz", True)
 
