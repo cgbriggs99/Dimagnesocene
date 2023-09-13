@@ -1,0 +1,123 @@
+import math
+import numpy as np
+
+set reference rhf
+
+molecule becp {
+    0 1
+    symmetry c1
+C
+C  1  r2
+C  2  r3  1  a3
+C  3  r4  2  a4  1  d4
+C  4  r5  3  a5  2  d5
+C  1  r6  2  a6  3  d6
+C  6  r7  1  a7  2  d7
+C  7  r8  6  a8  1  d8
+C  8  r9  7  a9  6  d9
+C  9  r10  8  a10  7  d10
+H  1  r11  2  a11  3  d11
+H  2  r12  1  a12  3  d12
+H  3  r13  2  a13  1  d13
+H  4  r14  3  a14  2  d14
+H  5  r15  4  a15  3  d15
+H  6  r16  1  a16  2  d16
+H  7  r17  6  a17  1  d17
+H  8  r18  7  a18  6  d18
+H  9  r19  8  a19  7  d19
+H  10  r20  9  a20  8  d20
+Mg  5  r21  4  a21  3  d21
+Mg  8  r22  7  a22  6  d22
+H  21  r23  5  a23  4  d23
+H  21  r24  5  a24  4  d24
+
+r2= 1.4335
+r3= 1.4335
+a3= 108.00
+r4= 1.4335
+a4= 108.00
+d4= 360.00
+r5= 1.4335
+a5= 108.00
+d5= 360.00
+r6= 6.8374
+a6=  89.88
+d6=  90.09
+r7= 1.4336
+a7=  90.12
+d7= 359.59
+r8= 1.4334
+a8= 108.00
+d8= 270.09
+r9= 1.4335
+a9= 108.01
+d9=   0.01
+r10= 1.4335
+a10= 107.99
+d10= 359.99
+r11= 1.0901
+a11= 125.99
+d11= 181.08
+r12= 1.0901
+a12= 126.00
+d12= 178.96
+r13= 1.0901
+a13= 126.00
+d13= 178.99
+r14= 1.0901
+a14= 125.99
+d14= 178.97
+r15= 1.0901
+a15= 125.98
+d15= 178.92
+r16= 1.0901
+a16=  90.86
+d16= 125.60
+r17= 1.0901
+a17= 126.02
+d17=  91.16
+r18= 1.0901
+a18= 125.99
+d18= 181.06
+r19= 1.0901
+a19= 126.00
+d19= 181.03
+r20= 1.0901
+a20= 125.97
+d20= 181.04
+r21= 2.3702
+a21=  72.41
+d21= 295.88
+r22= 2.3700
+a22=  72.40
+d22=  64.12
+r23= 2.3856
+a23= 126.38
+d23= 151.40
+r24= 2.4195
+a24= 107.61
+d24= 297.06
+
+}
+
+optimize("mp2/aug-cc-pVDZ")
+E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
+
+becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
+
+fstr = ""
+with open("out/dimagnesocene_h2.xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
+
+with open("out/dimagnesocene_h2.xyz", "w") as fp :
+    print(fstr, file = fp)
+
+wfn.to_file("out/dimagnesocene_h2.wf")
+fchk(wfn, "out/dimagnesocene_h2.fchk")

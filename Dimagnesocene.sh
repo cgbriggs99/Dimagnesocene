@@ -1,6 +1,6 @@
 #!/bin/sh
-#$ -q gen4.q,gen6.q
-#$ -N dimgcp-
+#$ -q gen4.q
+#$ -N dimgcp_h2
 #$ -S /bin/sh
 #$ -cwd
 
@@ -18,7 +18,7 @@ echo "    ID:                "$JOB_ID
 echo "    Hostname:          "$HOSTNAME
 echo "    Working directory: "$SGE_O_WORKDIR
 echo ""
-echo "    Submitted using:   submit -N dimgcp- -i in/dimagnesocene-.in -o out/dimagnesocene-.out gen4.q,gen6.q psi4@master"
+echo "    Submitted using:   submit -n 8 -N dimgcp_h2 -i in/dimagnesocene_h2.in -o out/dimagnesocene_h2.out gen4.q psi4@master"
 echo "***********************************************************************"
 
 
@@ -28,5 +28,5 @@ vulcan load psi4@master~ambit~chemps2~debug~pcmsolver~vectorization
 export PSI_SCRATCH=$TMPDIR
 export KMP_DUPLICATE_LIB_OK=TRUE
 
-psi4 -n 4 -i in/dimagnesocene-.in -o out/dimagnesocene-.out
+psi4 -n 8 -i in/dimagnesocene_h2.in -o out/dimagnesocene_h2.out
 

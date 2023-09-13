@@ -31,13 +31,13 @@
     -----------------------------------------------------------------------
 
 
-    Psi4 started on: Tuesday, 05 September 2023 01:09PM
+    Psi4 started on: Monday, 11 September 2023 04:16PM
 
-    Process ID: 12675
-    Host:       n049
+    Process ID: 26356
+    Host:       n066
     PSIDATADIR: /opt/psi/4/1.9a/share/psi4
     Memory:     500.0 MiB
-    Threads:    4
+    Threads:    8
     
   ==> Input File <==
 
@@ -108,6 +108,7 @@ set optking {
 }
 
 set SCF_TYPE OUT_OF_CORE
+set SCF_INITIAL_ACCELERATOR NONE
 optimize("ccsd/aug-cc-pVTZ")
 E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
 
@@ -132,7 +133,7 @@ fchk(wfn, "out/dimagnesocene.fchk")
 
 --------------------------------------------------------------------------
 
-Scratch directory: /tmp/932162.1.gen4.q/
+Scratch directory: /tmp/934106.1.gen4.q/
 gradient() will perform analytic gradient computation.
    => Libint2 <=
 
@@ -141,8 +142,8 @@ gradient() will perform analytic gradient computation.
     Onebody   basis highest AM E, G, H:  6, 5, 4
     Solid Harmonics ordering:            gaussian
 
-*** tstart() called on n049
-*** at Tue Sep  5 13:09:41 2023
+*** tstart() called on n066
+*** at Mon Sep 11 16:16:53 2023
 
    => Loading Basis Set <=
 
@@ -159,7 +160,7 @@ gradient() will perform analytic gradient computation.
                by Justin Turney, Rob Parrish, Andy Simmonett
                           and Daniel G. A. Smith
                               RHF Reference
-                        4 Threads,    500 MiB Core
+                        8 Threads,    500 MiB Core
          ---------------------------------------------------------
 
   ==> Geometry <==
@@ -259,21 +260,21 @@ gradient() will perform analytic gradient computation.
 
                         Total Energy        Delta E     RMS |[F,P]|
 
-   @RHF iter SAD:  -786.56886492383444   -7.86569e+02   0.00000e+00 
-   @RHF iter   1:  -782.66373902388375    3.90513e+00   1.64558e-03 DIIS/ADIIS
-   @RHF iter   2:  -783.16393861602648   -5.00200e-01   1.08243e-03 DIIS/ADIIS
-   @RHF iter   3:  -783.50065192613545   -3.36713e-01   9.25453e-05 DIIS
-   @RHF iter   4:  -783.50500215536783   -4.35023e-03   1.70752e-05 DIIS
-   @RHF iter   5:  -783.50514757769713   -1.45422e-04   6.02012e-06 DIIS
-   @RHF iter   6:  -783.50516427133232   -1.66936e-05   9.98284e-07 DIIS
-   @RHF iter   7:  -783.50516511375088   -8.42419e-07   3.44098e-07 DIIS
-   @RHF iter   8:  -783.50516517869926   -6.49484e-08   1.44075e-07 DIIS
-   @RHF iter   9:  -783.50516519196924   -1.32700e-08   2.86496e-08 DIIS
-   @RHF iter  10:  -783.50516519305040   -1.08116e-09   7.66137e-09 DIIS
-   @RHF iter  11:  -783.50516519315227   -1.01863e-10   2.17469e-09 DIIS
-   @RHF iter  12:  -783.50516519315249   -2.27374e-13   5.97051e-10 DIIS
-   @RHF iter  13:  -783.50516519316795   -1.54614e-11   1.45243e-10 DIIS
-   @RHF iter  14:  -783.50516519316068    7.27596e-12   5.37007e-11 DIIS
+   @RHF iter SAD:  -786.56886492383489   -7.86569e+02   0.00000e+00 
+   @RHF iter   1:  -782.66373902388307    3.90513e+00   1.64558e-03 DIIS
+   @RHF iter   2:  -783.16393861603990   -5.00200e-01   1.08243e-03 DIIS
+   @RHF iter   3:  -783.50072867777078   -3.36790e-01   9.07041e-05 DIIS
+   @RHF iter   4:  -783.50500219601815   -4.27352e-03   1.70643e-05 DIIS
+   @RHF iter   5:  -783.50514762394789   -1.45428e-04   6.01830e-06 DIIS
+   @RHF iter   6:  -783.50516427577838   -1.66518e-05   9.96477e-07 DIIS
+   @RHF iter   7:  -783.50516511449484   -8.38716e-07   3.42457e-07 DIIS
+   @RHF iter   8:  -783.50516517879021   -6.42954e-08   1.43634e-07 DIIS
+   @RHF iter   9:  -783.50516519197538   -1.31852e-08   2.85535e-08 DIIS
+   @RHF iter  10:  -783.50516519305972   -1.08435e-09   7.66728e-09 DIIS
+   @RHF iter  11:  -783.50516519315431   -9.45874e-11   2.17887e-09 DIIS
+   @RHF iter  12:  -783.50516519315977   -5.45697e-12   5.95079e-10 DIIS
+   @RHF iter  13:  -783.50516519315568    4.09273e-12   1.45009e-10 DIIS
+   @RHF iter  14:  -783.50516519316432   -8.64020e-12   5.18916e-11 DIIS
   Energy and wave function converged.
 
 
@@ -314,7 +315,7 @@ gradient() will perform analytic gradient computation.
       72A      0.111893    73A      0.114246    74A      0.115561  
       75A      0.117719    76A      0.118767    77A      0.118933  
       78A      0.120451    79A      0.120613    80A      0.136315  
-      81A      0.136475    82A      0.145482    83A      0.148694  
+      81A      0.136474    82A      0.145482    83A      0.148694  
       84A      0.149319    85A      0.154829    86A      0.154847  
       87A      0.156453    88A      0.156689    89A      0.158628  
       90A      0.159755    91A      0.160925    92A      0.169919  
@@ -323,7 +324,7 @@ gradient() will perform analytic gradient computation.
       99A      0.177608   100A      0.179489   101A      0.189279  
      102A      0.191234   103A      0.201977   104A      0.205660  
      105A      0.210961   106A      0.218649   107A      0.218748  
-     108A      0.235884   109A      0.240598   110A      0.241321  
+     108A      0.235884   109A      0.240599   110A      0.241321  
      111A      0.244455   112A      0.246897   113A      0.256163  
      114A      0.256227   115A      0.257425   116A      0.259321  
      117A      0.260485   118A      0.265138   119A      0.265890  
@@ -380,7 +381,7 @@ gradient() will perform analytic gradient computation.
      270A      0.962563   271A      0.964563   272A      0.970008  
      273A      0.985492   274A      0.992520   275A      1.004813  
      276A      1.008812   277A      1.009964   278A      1.010971  
-     279A      1.011816   280A      1.012486   281A      1.015660  
+     279A      1.011815   280A      1.012486   281A      1.015660  
      282A      1.016667   283A      1.020296   284A      1.023121  
      285A      1.027665   286A      1.033502   287A      1.033633  
      288A      1.036135   289A      1.038440   290A      1.054916  
@@ -558,14 +559,14 @@ gradient() will perform analytic gradient computation.
     NA   [    47 ]
     NB   [    47 ]
 
-  @RHF Final Energy:  -783.50516519316068
+  @RHF Final Energy:  -783.50516519316432
 
    => Energetics <=
 
     Nuclear Repulsion Energy =            811.7965886041375825
-    One-Electron Energy =               -2693.0927823127126430
-    Two-Electron Energy =                1097.7910285154143821
-    Total Energy =                       -783.5051651931607921
+    One-Electron Energy =               -2693.0927823432298283
+    Two-Electron Energy =                1097.7910285459279294
+    Total Energy =                       -783.5051651931644301
 
 Computation Completed
 
@@ -582,25 +583,25 @@ Properties computed using the SCF density matrix
  ------------------------------------------------------------------------------------
 
  L = 1.  Multiply by 2.5417464519 to convert [e a0] to [Debye]
- Dipole X            :         -0.0000000            0.0000000           -0.0000000
+ Dipole X            :          0.0000000            0.0000000            0.0000000
  Dipole Y            :         -0.0000000           -0.0000000           -0.0000000
  Dipole Z            :         -0.1508401            0.1484233           -0.0024168
  Magnitude           :                                                    0.0024168
 
  ------------------------------------------------------------------------------------
 
-*** tstop() called on n049 at Wed Sep  6 05:45:12 2023
+*** tstop() called on n066 at Tue Sep 12 08:54:20 2023
 Module time:
-	user time   =   29990.13 seconds =     499.84 minutes
-	system time =   23473.17 seconds =     391.22 minutes
-	total time  =      59731 seconds =     995.52 minutes
+	user time   =   29875.50 seconds =     497.93 minutes
+	system time =   23328.35 seconds =     388.81 minutes
+	total time  =      59847 seconds =     997.45 minutes
 Total time:
-	user time   =   29990.13 seconds =     499.84 minutes
-	system time =   23473.17 seconds =     391.22 minutes
-	total time  =      59731 seconds =     995.52 minutes
+	user time   =   29875.50 seconds =     497.93 minutes
+	system time =   23328.35 seconds =     388.81 minutes
+	total time  =      59847 seconds =     997.45 minutes
 
-*** tstart() called on n049
-*** at Wed Sep  6 05:45:12 2023
+*** tstart() called on n066
+*** at Tue Sep 12 08:54:20 2023
 
 
 	Wfn Parameters:
@@ -626,7 +627,7 @@ Total time:
 Traceback (most recent call last):
   File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
     exec(content)
-  File "<string>", line 55, in <module>
+  File "<string>", line 56, in <module>
   File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 1245, in optimize
     G, wfn = gradient(lowername, return_wfn=True, molecule=molecule, **kwargs)
   File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 639, in gradient
@@ -654,11 +655,11 @@ psi::IntegralTransform::presort_so_tei()
 
 
 Printing out the relevant lines from the Psithon --> Python processed input file:
-        achbe = 128.09
     ""","becp")
     core.IO.set_default_namespace("becp")
     core.set_local_option("OPTKING", "FROZEN_BEND", "(""        1 2 3        2 3 4        3 4 5        4 5 1        5 1 2        6 7 8        7 8 9        8 9 10        9 10 6        10 6 7        11 1 2        12 2 3        13 3 4        14 4 5        15 5 1        16 6 7        17 7 8        18 8 9        19 9 10        20 10 6    "")")
     core.set_global_option("SCF_TYPE", "OUT_OF_CORE")
+    core.set_global_option("SCF_INITIAL_ACCELERATOR", "NONE")
 --> optimize("ccsd/aug-cc-pVTZ")
     E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
     becp.save_xyz_file("out/dimagnesocene.xyz", True)
@@ -682,8 +683,8 @@ Printing out the relevant lines from the Psithon --> Python processed input file
 !                                                                                  !
 !----------------------------------------------------------------------------------!
 
-    Psi4 stopped on: Wednesday, 06 September 2023 06:20PM
-    Psi4 wall time for execution: 1 day, 5:11:13.57
+    Psi4 stopped on: Wednesday, 13 September 2023 12:05AM
+    Psi4 wall time for execution: 1 day, 7:48:48.38
 
 *** Psi4 encountered an error. Buy a developer more coffee!
 *** Resources and help at github.com/psi4/psi4.

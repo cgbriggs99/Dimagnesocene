@@ -33,6 +33,9 @@ molecule becp {
 set OPT_TYPE TS
 set GEOM_MAXITER 150
 set SCF_TYPE OUT_OF_CORE
+set SCF_INITIAL_ACCELERATOR NONE
+set CACHELEVEL 0
+set PRINT 2
 
 optimize("ccsd/aug-cc-pVTZ")
 E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
