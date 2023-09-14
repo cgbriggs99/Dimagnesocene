@@ -1,0 +1,63 @@
+import math
+import numpy as np
+
+set reference rhf
+
+molecule becp {
+    0 1
+    symmetry c1
+ C    3.377399750010    1.005299840306   -0.715185929445
+ C    3.377399750010    1.005299840306    0.714919056084
+ C    3.377399750010   -0.361319760570    1.159124401200
+ C    3.390217478973   -1.203593400818   -0.000150796093
+ C    3.377501579575   -0.361327617107   -1.159390293293
+ C   -3.379114096785    0.983443906080   -0.709034482617
+ C   -3.378090724724    0.975630555007    0.720940359424
+ C   -3.375970314681   -0.393220300942    1.157837055866
+ C   -3.388280390436   -1.229408264092   -0.006067305615
+ C   -3.377484778658   -0.380532412265   -1.160862185454
+ H    3.380382258851    1.887259973554   -1.355464041013
+ H    3.380278347944    1.887253613574    1.355203055297
+ H    3.403359001494   -0.697868556790    2.195802326198
+ H    3.388394307631   -2.293198696819   -0.000162316421
+ H    3.403320802715   -0.697888275343   -2.196065203192
+ H   -3.383146443284    1.869020106024   -1.344241724439
+ H   -3.381403082708    1.854207788654    1.365802611069
+ H   -3.402384292469   -0.735631203398    2.192581255016
+ H   -3.387693056954   -2.319014549841   -0.012021120459
+ H   -3.405471702937   -0.711646347065   -2.199238285099
+Mg    1.369964752424    0.003027515210   -0.000016450616
+Mg   -1.370277208974   -0.023879134755   -0.001080310946
+ H   -0.009924855328    1.250833306130    0.002076248921
+ H    0.010079893083   -1.276599718054   -0.003531297116
+}
+
+set SCF_TYPE OUT_OF_CORE
+set SCF_INITIAL_ACCELERATOR NONE
+set CACHELEVEL 0
+set PRINT 2
+
+E, wfn = optimize("ccsd/aug-cc-pVDZ", return_wfn = True)
+
+becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
+
+fstr = ""
+with open("out/dimagnesocene_h2.xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
+
+with open("out/dimagnesocene_h2.xyz", "w") as fp :
+    print(fstr, file = fp)
+
+wfn.to_file("out/dimagnesocene_h2.wf")
+try:
+    fchk(wfn, "out/dimagnesocene_h2.fchk")
+except Exception :
+    E, wfn = energy("hf/6-311g", return_wfn = True)
+    fchk(wfn, "out/dimagnesocene_h2.fchk")

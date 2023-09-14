@@ -1,0 +1,13 @@
+import numpy as np
+
+molecule mg2 {
+0 1
+Mg
+Mg 1 r
+
+r 2.85
+}
+
+E, wfn = optimize("ccsd/aug-cc-pVDZ", return_wfn = True)
+
+
