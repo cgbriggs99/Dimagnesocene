@@ -31,9 +31,9 @@
     -----------------------------------------------------------------------
 
 
-    Psi4 started on: Monday, 11 September 2023 04:16PM
+    Psi4 started on: Wednesday, 13 September 2023 12:32PM
 
-    Process ID: 26356
+    Process ID: 31761
     Host:       n066
     PSIDATADIR: /opt/psi/4/1.9a/share/psi4
     Memory:     500.0 MiB
@@ -82,33 +82,10 @@ molecule becp {
 
 }
 
-set optking {
-    frozen_bend = ("
-        1 2 3
-        2 3 4
-        3 4 5
-        4 5 1
-        5 1 2
-        6 7 8
-        7 8 9
-        8 9 10
-        9 10 6
-        10 6 7
-        11 1 2
-        12 2 3
-        13 3 4
-        14 4 5
-        15 5 1
-        16 6 7
-        17 7 8
-        18 8 9
-        19 9 10
-        20 10 6
-    ")
-}
-
 set SCF_TYPE OUT_OF_CORE
 set SCF_INITIAL_ACCELERATOR NONE
+set CACHELEVEL 0
+set PRINT 2
 optimize("ccsd/aug-cc-pVTZ")
 E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
 
@@ -129,11 +106,15 @@ with open("out/dimagnesocene.xyz", "w") as fp :
     print(fstr, file = fp)
 
 wfn.to_file("out/dimagnesocene.wf")
-fchk(wfn, "out/dimagnesocene.fchk")
+try:
+    fchk(wfn, "out/dimagnesocene.fchk")
+except Exception :
+    E, wfn = energy("hf/6-311g", return_wfn = True)
+    fchk(wfn, "out/dimagnesocene.fchk")
 
 --------------------------------------------------------------------------
 
-Scratch directory: /tmp/934106.1.gen4.q/
+Scratch directory: /tmp/935121.1.gen4.q/
 gradient() will perform analytic gradient computation.
    => Libint2 <=
 
@@ -143,7 +124,7 @@ gradient() will perform analytic gradient computation.
     Solid Harmonics ordering:            gaussian
 
 *** tstart() called on n066
-*** at Mon Sep 11 16:16:53 2023
+*** at Wed Sep 13 12:32:55 2023
 
    => Loading Basis Set <=
 
@@ -220,13 +201,41 @@ gradient() will perform analytic gradient computation.
 
   ==> Primary Basis <==
 
-  Basis Set: AUG-CC-PVTZ
-    Blend: AUG-CC-PVTZ
-    Number of shells: 262
-    Number of basis functions: 790
-    Number of Cartesian functions: 918
-    Spherical Harmonics?: true
-    Max angular momentum: 3
+  -AO BASIS SET INFORMATION:
+    Name                   = AUG-CC-PVTZ
+    Blend                  = AUG-CC-PVTZ
+    Total number of shells = 262
+    Number of primitives   = 562
+    Number of AO           = 918
+    Number of SO           = 790
+    Maximum AM             = 3
+    Spherical Harmonics    = TRUE
+
+  -Contraction Scheme:
+    Atom   Type   All Primitives // Shells:
+   ------ ------ --------------------------
+       1     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       2     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       3     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       4     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       5     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       6     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       7     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       8     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+       9     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+      10     C     19s 6p 3d 2f // 5s 4p 3d 2f 
+      11     H     6s 3p 2d // 4s 3p 2d 
+      12     H     6s 3p 2d // 4s 3p 2d 
+      13     H     6s 3p 2d // 4s 3p 2d 
+      14     H     6s 3p 2d // 4s 3p 2d 
+      15     H     6s 3p 2d // 4s 3p 2d 
+      16     H     6s 3p 2d // 4s 3p 2d 
+      17     H     6s 3p 2d // 4s 3p 2d 
+      18     H     6s 3p 2d // 4s 3p 2d 
+      19     H     6s 3p 2d // 4s 3p 2d 
+      20     H     6s 3p 2d // 4s 3p 2d 
+      21    MG     48s 23p 3d 2f // 6s 5p 3d 2f 
+      22    MG     48s 23p 3d 2f // 6s 5p 3d 2f 
 
   ==> Integral Setup <==
 
@@ -260,21 +269,21 @@ gradient() will perform analytic gradient computation.
 
                         Total Energy        Delta E     RMS |[F,P]|
 
-   @RHF iter SAD:  -786.56886492383489   -7.86569e+02   0.00000e+00 
-   @RHF iter   1:  -782.66373902388307    3.90513e+00   1.64558e-03 DIIS
-   @RHF iter   2:  -783.16393861603990   -5.00200e-01   1.08243e-03 DIIS
-   @RHF iter   3:  -783.50072867777078   -3.36790e-01   9.07041e-05 DIIS
-   @RHF iter   4:  -783.50500219601815   -4.27352e-03   1.70643e-05 DIIS
-   @RHF iter   5:  -783.50514762394789   -1.45428e-04   6.01830e-06 DIIS
-   @RHF iter   6:  -783.50516427577838   -1.66518e-05   9.96477e-07 DIIS
-   @RHF iter   7:  -783.50516511449484   -8.38716e-07   3.42457e-07 DIIS
-   @RHF iter   8:  -783.50516517879021   -6.42954e-08   1.43634e-07 DIIS
-   @RHF iter   9:  -783.50516519197538   -1.31852e-08   2.85535e-08 DIIS
-   @RHF iter  10:  -783.50516519305972   -1.08435e-09   7.66728e-09 DIIS
-   @RHF iter  11:  -783.50516519315431   -9.45874e-11   2.17887e-09 DIIS
-   @RHF iter  12:  -783.50516519315977   -5.45697e-12   5.95079e-10 DIIS
-   @RHF iter  13:  -783.50516519315568    4.09273e-12   1.45009e-10 DIIS
-   @RHF iter  14:  -783.50516519316432   -8.64020e-12   5.18916e-11 DIIS
+   @RHF iter SAD:  -786.56886492383444   -7.86569e+02   0.00000e+00 
+   @RHF iter   1:  -782.66373902387534    3.90513e+00   1.64558e-03 DIIS
+   @RHF iter   2:  -783.16393861603763   -5.00200e-01   1.08243e-03 DIIS
+   @RHF iter   3:  -783.50072867778078   -3.36790e-01   9.07041e-05 DIIS
+   @RHF iter   4:  -783.50500219601315   -4.27352e-03   1.70643e-05 DIIS
+   @RHF iter   5:  -783.50514762394357   -1.45428e-04   6.01830e-06 DIIS
+   @RHF iter   6:  -783.50516427576724   -1.66518e-05   9.96477e-07 DIIS
+   @RHF iter   7:  -783.50516511449916   -8.38732e-07   3.42457e-07 DIIS
+   @RHF iter   8:  -783.50516517878975   -6.42906e-08   1.43634e-07 DIIS
+   @RHF iter   9:  -783.50516519199289   -1.32031e-08   2.85535e-08 DIIS
+   @RHF iter  10:  -783.50516519304995   -1.05706e-09   7.66736e-09 DIIS
+   @RHF iter  11:  -783.50516519315158   -1.01636e-10   2.17893e-09 DIIS
+   @RHF iter  12:  -783.50516519315477   -3.18323e-12   5.95365e-10 DIIS
+   @RHF iter  13:  -783.50516519314976    5.00222e-12   1.45294e-10 DIIS
+   @RHF iter  14:  -783.50516519315931   -9.54969e-12   5.21917e-11 DIIS
   Energy and wave function converged.
 
 
@@ -365,14 +374,14 @@ gradient() will perform analytic gradient computation.
      222A      0.687875   223A      0.690220   224A      0.693082  
      225A      0.709818   226A      0.718476   227A      0.719858  
      228A      0.721080   229A      0.727180   230A      0.727648  
-     231A      0.730838   232A      0.732726   233A      0.738648  
+     231A      0.730838   232A      0.732726   233A      0.738649  
      234A      0.741910   235A      0.742693   236A      0.743807  
      237A      0.758287   238A      0.758657   239A      0.764691  
      240A      0.766008   241A      0.766942   242A      0.769490  
      243A      0.770941   244A      0.780416   245A      0.802674  
      246A      0.803201   247A      0.814253   248A      0.821450  
      249A      0.822014   250A      0.827117   251A      0.827869  
-     252A      0.828464   253A      0.846489   254A      0.847577  
+     252A      0.828463   253A      0.846489   254A      0.847577  
      255A      0.860967   256A      0.897053   257A      0.897271  
      258A      0.898216   259A      0.898377   260A      0.899585  
      261A      0.928068   262A      0.928115   263A      0.928842  
@@ -381,7 +390,7 @@ gradient() will perform analytic gradient computation.
      270A      0.962563   271A      0.964563   272A      0.970008  
      273A      0.985492   274A      0.992520   275A      1.004813  
      276A      1.008812   277A      1.009964   278A      1.010971  
-     279A      1.011815   280A      1.012486   281A      1.015660  
+     279A      1.011816   280A      1.012486   281A      1.015660  
      282A      1.016667   283A      1.020296   284A      1.023121  
      285A      1.027665   286A      1.033502   287A      1.033633  
      288A      1.036135   289A      1.038440   290A      1.054916  
@@ -422,7 +431,7 @@ gradient() will perform analytic gradient computation.
      393A      1.648779   394A      1.651223   395A      1.651571  
      396A      1.651893   397A      1.655217   398A      1.655796  
      399A      1.677222   400A      1.693466   401A      1.694560  
-     402A      1.701426   403A      1.702652   404A      1.703505  
+     402A      1.701426   403A      1.702651   404A      1.703505  
      405A      1.749101   406A      1.749971   407A      1.751769  
      408A      1.758243   409A      1.758250   410A      1.758955  
      411A      1.760758   412A      1.782431   413A      1.787209  
@@ -444,7 +453,7 @@ gradient() will perform analytic gradient computation.
      459A      2.096904   460A      2.098060   461A      2.098408  
      462A      2.098761   463A      2.101416   464A      2.112747  
      465A      2.146222   466A      2.156735   467A      2.157174  
-     468A      2.160045   469A      2.164561   470A      2.165710  
+     468A      2.160045   469A      2.164560   470A      2.165710  
      471A      2.170896   472A      2.193491   473A      2.197458  
      474A      2.204737   475A      2.229898   476A      2.251002  
      477A      2.266382   478A      2.272121   479A      2.272947  
@@ -467,7 +476,7 @@ gradient() will perform analytic gradient computation.
      528A      3.054364   529A      3.082713   530A      3.092809  
      531A      3.099050   532A      3.106283   533A      3.144692  
      534A      3.164094   535A      3.219874   536A      3.220720  
-     537A      3.240519   538A      3.279964   539A      3.357920  
+     537A      3.240519   538A      3.279963   539A      3.357920  
      540A      3.383744   541A      3.384051   542A      3.404675  
      543A      3.408218   544A      3.432763   545A      3.438183  
      546A      3.442200   547A      3.471924   548A      3.486654  
@@ -559,14 +568,14 @@ gradient() will perform analytic gradient computation.
     NA   [    47 ]
     NB   [    47 ]
 
-  @RHF Final Energy:  -783.50516519316432
+  @RHF Final Energy:  -783.50516519315931
 
    => Energetics <=
 
     Nuclear Repulsion Energy =            811.7965886041375825
-    One-Electron Energy =               -2693.0927823432298283
-    Two-Electron Energy =                1097.7910285459279294
-    Total Energy =                       -783.5051651931644301
+    One-Electron Energy =               -2693.0927823372030616
+    Two-Electron Energy =                1097.7910285399061650
+    Total Energy =                       -783.5051651931594279
 
 Computation Completed
 
@@ -590,18 +599,18 @@ Properties computed using the SCF density matrix
 
  ------------------------------------------------------------------------------------
 
-*** tstop() called on n066 at Tue Sep 12 08:54:20 2023
+*** tstop() called on n066 at Thu Sep 14 05:02:36 2023
 Module time:
-	user time   =   29875.50 seconds =     497.93 minutes
-	system time =   23328.35 seconds =     388.81 minutes
-	total time  =      59847 seconds =     997.45 minutes
+	user time   =   30237.07 seconds =     503.95 minutes
+	system time =   23543.30 seconds =     392.39 minutes
+	total time  =      59381 seconds =     989.68 minutes
 Total time:
-	user time   =   29875.50 seconds =     497.93 minutes
-	system time =   23328.35 seconds =     388.81 minutes
-	total time  =      59847 seconds =     997.45 minutes
+	user time   =   30237.07 seconds =     503.95 minutes
+	system time =   23543.30 seconds =     392.39 minutes
+	total time  =      59381 seconds =     989.68 minutes
 
 *** tstart() called on n066
-*** at Tue Sep 12 08:54:20 2023
+*** at Thu Sep 14 05:02:36 2023
 
 
 	Wfn Parameters:
@@ -613,7 +622,7 @@ Total time:
 	AO-Basis             = NONE
 	Semicanonical        = false
 	Reference            = RHF
-	Print Level          = 1
+	Print Level          = 2
 
 	IRREP	# MOs	# FZDC	# DOCC	# SOCC	# VIRT	# FZVR
 	-----	-----	------	------	------	------	------
@@ -623,68 +632,3 @@ Total time:
 	(OO|OO)...
 	Presorting SO-basis two-electron integrals.
 	Sorting File: SO Ints (nn|nn) nbuckets = 1495
-
-Traceback (most recent call last):
-  File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
-    exec(content)
-  File "<string>", line 56, in <module>
-  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 1245, in optimize
-    G, wfn = gradient(lowername, return_wfn=True, molecule=molecule, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 639, in gradient
-    wfn = procedures['gradient'][lowername](lowername, molecule=molecule, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 906, in select_ccsd_gradient
-    return func(name, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 2936, in run_ccenergy_gradient
-    ccwfn = run_ccenergy(name, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 2898, in run_ccenergy
-    core.cctransort(ref_wfn)
-
-RuntimeError: 
-Fatal Error: WRITE failed. Only some of the bytes were written!
-Error writing a full page, unit 41.
-PSIO_ERROR: 12 (error writing to file)
-
-Error occurred in file: /tmp/psi4/psi4/src/psi4/libpsio/error.cc on line: 134
-The most recent 5 function calls were:
-
-psi::PsiException::PsiException(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char const*, int)
-psi::PSIO::rw(unsigned long, char*, psi::psio_address, unsigned long, int)
-psi::PSIO::write(unsigned long, char const*, char*, unsigned long, psi::psio_address, psi::psio_address*)
-psi::IntegralTransform::presort_so_tei()
-
-
-
-Printing out the relevant lines from the Psithon --> Python processed input file:
-    ""","becp")
-    core.IO.set_default_namespace("becp")
-    core.set_local_option("OPTKING", "FROZEN_BEND", "(""        1 2 3        2 3 4        3 4 5        4 5 1        5 1 2        6 7 8        7 8 9        8 9 10        9 10 6        10 6 7        11 1 2        12 2 3        13 3 4        14 4 5        15 5 1        16 6 7        17 7 8        18 8 9        19 9 10        20 10 6    "")")
-    core.set_global_option("SCF_TYPE", "OUT_OF_CORE")
-    core.set_global_option("SCF_INITIAL_ACCELERATOR", "NONE")
---> optimize("ccsd/aug-cc-pVTZ")
-    E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
-    becp.save_xyz_file("out/dimagnesocene.xyz", True)
-    fstr = ""
-    with open("out/dimagnesocene.xyz", "r") as fp :
-        for line in fp :
-
-!----------------------------------------------------------------------------------!
-!                                                                                  !
-! Fatal Error: WRITE failed. Only some of the bytes were written!                  !
-! Error writing a full page, unit 41.                                              !
-! PSIO_ERROR: 12 (error writing to file)                                           !
-! Error occurred in file: /tmp/psi4/psi4/src/psi4/libpsio/error.cc on line: 134    !
-! The most recent 5 function calls were:                                           !
-! psi::PsiException::PsiException(std::__cxx11::basic_string<char,                 !
-!     std::char_traits<char>, std::allocator<char> >, char const*, int)            !
-! psi::PSIO::rw(unsigned long, char*, psi::psio_address, unsigned long, int)       !
-! psi::PSIO::write(unsigned long, char const*, char*, unsigned long,               !
-!     psi::psio_address, psi::psio_address*)                                       !
-! psi::IntegralTransform::presort_so_tei()                                         !
-!                                                                                  !
-!----------------------------------------------------------------------------------!
-
-    Psi4 stopped on: Wednesday, 13 September 2023 12:05AM
-    Psi4 wall time for execution: 1 day, 7:48:48.38
-
-*** Psi4 encountered an error. Buy a developer more coffee!
-*** Resources and help at github.com/psi4/psi4.

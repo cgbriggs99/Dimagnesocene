@@ -32,8 +32,12 @@ Mg   -1.370277208974   -0.023879134755   -0.001080310946
  H    0.010079893083   -1.276599718054   -0.003531297116
 }
 
-optimize("mp2/aug-cc-pVDZ")
-E, wfn = energy("mp2/aug-cc-pVDZ", return_wfn = True)
+set SCF_TYPE OUT_OF_CORE
+set SCF_INITIAL_ACCELERATOR NONE
+set CACHELEVEL 0
+set PRINT 2
+
+E, wfn = optimize("ccsd/aug-cc-pVDZ", return_wfn = True)
 
 becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
 
@@ -52,4 +56,8 @@ with open("out/dimagnesocene_h2.xyz", "w") as fp :
     print(fstr, file = fp)
 
 wfn.to_file("out/dimagnesocene_h2.wf")
-fchk(wfn, "out/dimagnesocene_h2.fchk")
+try:
+    fchk(wfn, "out/dimagnesocene_h2.fchk")
+except Exception :
+    E, wfn = energy("hf/6-311g", return_wfn = True)
+    fchk(wfn, "out/dimagnesocene_h2.fchk")

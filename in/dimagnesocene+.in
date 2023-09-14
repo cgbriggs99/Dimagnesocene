@@ -37,38 +37,10 @@ molecule becp {
 
 }
 
-
-set optking {
-    frozen_bend = ("
-        1 2 3
-        2 3 4
-        3 4 5
-        4 5 1
-        5 1 2
-        6 7 8
-        7 8 9
-        8 9 10
-        9 10 6
-        10 6 7
-        11 1 2
-        12 2 3
-        13 3 4
-        14 4 5
-        15 5 1
-        16 6 7
-        17 7 8
-        18 8 9
-        19 9 10
-        20 10 6
-    ")
-}
-
 set SCF_TYPE OUT_OF_CORE
-set SCF_INITIAL_ACCELERATOR NONE
 set CACHELEVEL 0
 set PRINT 2
-optimize("ccsd/aug-cc-pVTZ")
-E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
+E, wfn = optimize("ccsd/aug-cc-pVTZ", return_wfn = True)
 
 
 becp.save_xyz_file("out/dimagnesocene+.xyz", True)
@@ -88,4 +60,9 @@ with open("out/dimagnesocene+.xyz", "w") as fp :
     print(fstr, file = fp)
 
 wfn.to_file("out/dimagnesocene+.wf")
-fchk(wfn, "out/dimagnesocene+.fchk")
+try:
+    fchk(wfn, "out/dimagnesocene+.fchk")
+except Exception :
+    E, wfn = energy("hf/6-311g", return_wfn = True)
+    fchk(wfn, "out/dimagnesocene+.fchk")
+
