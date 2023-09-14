@@ -1,0 +1,90 @@
+
+import os
+
+# Set the Pis4 path for the basis sets.
+if 'PSIPATH' is in os.environ :
+    os.environ['PSIPATH'] = os.environ['PSIPATH'] + ":/home/vulcan/connor/git/Dimagnesocene/in"
+else :
+    os.environ['PSIPATH'] = "/home/vulcan/connor/git/Dimagnesocene/in"
+
+out_dir = "out/calcium"
+file_root = "dicalcicene"
+
+double_zeta {
+    assign aug-ccPVDZ
+    assign Ca aug-ccPVDZ-X2C
+    assign Sr aug-ccPVDZ-X2C
+    assign Ba aug-ccPVDZ-X2C
+    assign Ra aug-ccPVDZ-X2C
+}
+
+triple_zeta {
+    assign aug-ccPVTZ
+    assign Ca aug-ccPVTZ-X2C
+    assign Sr aug-ccPVTZ-X2C
+    assign Ba aug-ccPVTZ-X2C
+    assign Ra aug-ccPVTZ-X2C
+}
+
+set reference rhf
+
+molecule cacp {
+    0 1
+    symmetry c1
+
+    C
+    C 1 dcc
+    C 2 dcc 1 108
+    C 3 dcc 2 108 1 0
+    C 4 dcc 3 108 2 0
+    C 1 drr 2 90  3 90
+    C 2 drr 3 90  4 90
+    C 3 drr 4 90  5 90
+    C 8 dcc 7 108 6 0
+    C 9 dcc 8 108 7 0
+    H 1 dch 2 126 3 180
+    H 2 dch 3 126 4 180
+    H 3 dch 4 126 5 180
+    H 4 dch 5 126 1 180
+    H 5 dch 1 126 2 180
+    H 6 dch 7 126 8 180
+    H 7 dch 8 126 9 180
+    H 8 dch 9 126 10 180
+    H 9 dch 10 126 6 180
+    H 10 dch 6 126 7 180
+    Ca 1 dcca 11 achca 6 0
+    Ca 6 dcca 16 achca 1 0
+
+    dcc = 1.33
+    drr = 6.092
+    dch = 1.088
+    dcca = 1.930
+    achca = 128.09
+
+}
+
+set SCF_TYPE OUT_OF_CORE
+set SCF_INITIAL_ACCELERATOR NONE
+set CACHELEVEL 0
+set PRINT 2
+E, wfn = optimize("mp2/double_zeta", return_wfn = True)
+
+cacp.save_xyz_file(f"{out_dir}/{file_root}.xyz", True)
+
+fstr = ""
+with open(f"{out_dir}/{file_root}.xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
+
+with open("{out_dir}/{file_root}.xyz", "w") as fp :
+    print(fstr, file = fp)
+
+wfn.to_file("{out_dir}/{file_root}")
+cubeprop(wfn, CUBEPROP_FILEPATH = f"/home/vulcan/cgb31826/git/Dimagnesocene/{out_dir}/{file_root}_cube")
+fchk(wfn, "{out_dir}/{file_root}.fchk")
