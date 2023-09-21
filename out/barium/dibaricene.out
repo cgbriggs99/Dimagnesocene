@@ -1,0 +1,444 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.9a1.dev12 
+
+                         Git: Rev {master} 6ebe472 dirty
+
+
+    D. G. A. Smith, L. A. Burns, A. C. Simmonett, R. M. Parrish,
+    M. C. Schieber, R. Galvelis, P. Kraus, H. Kruse, R. Di Remigio,
+    A. Alenaizan, A. M. James, S. Lehtola, J. P. Misiewicz, M. Scheurer,
+    R. A. Shaw, J. B. Schriber, Y. Xie, Z. L. Glick, D. A. Sirianni,
+    J. S. O'Brien, J. M. Waldrop, A. Kumar, E. G. Hohenstein,
+    B. P. Pritchard, B. R. Brooks, H. F. Schaefer III, A. Yu. Sokolov,
+    K. Patkowski, A. E. DePrince III, U. Bozkaya, R. A. King,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, C. D. Sherrill,
+    J. Chem. Phys. 152(18) 184108 (2020). https://doi.org/10.1063/5.0006002
+
+                            Additional Code Authors
+    E. T. Seidl, C. L. Janssen, E. F. Valeev, M. L. Leininger,
+    J. F. Gonthier, R. M. Richard, H. R. McAlexander, M. Saitow, X. Wang,
+    P. Verma, M. H. Lechner, A. Jiang, S. Behnle, A. G. Heide,
+    M. F. Herbst, and D. L. Poole
+
+             Previous Authors, Complete List of Code Contributors,
+                       and Citations for Specific Modules
+    https://github.com/psi4/psi4/blob/master/codemeta.json
+    https://github.com/psi4/psi4/graphs/contributors
+    http://psicode.org/psi4manual/master/introduction.html#citing-psifour
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Thursday, 14 September 2023 04:24PM
+
+    Process ID: 9568
+    Host:       n067
+    PSIDATADIR: /opt/psi/4/1.9a/share/psi4
+    Memory:     500.0 MiB
+    Threads:    8
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+
+import os
+
+# Set the Pis4 path for the basis sets.
+if 'PSIPATH' is os.environ :
+    os.environ['PSIPATH'] = os.environ['PSIPATH'] + ":/home/vulcan/cgb31826/git/Dimagnesocene/in"
+else :
+    os.environ['PSIPATH'] = "/home/vulcan/cgb31826/git/Dimagnesocene/in"
+
+out_dir = "out/barium"
+file_root = "dibaricene"
+
+basis double_zeta {
+    assign aug-cc-PVDZ
+    assign Ca aug-cc-PVDZ-X2C
+    assign Sr aug-cc-PVDZ-X2C
+    assign Ba aug-cc-PVDZ-X2C
+    assign Ra aug-cc-PVDZ-X2C
+}
+
+basis triple_zeta {
+    assign aug-cc-PVTZ
+    assign Ca aug-cc-PVTZ-X2C
+    assign Sr aug-cc-PVTZ-X2C
+    assign Ba aug-cc-PVTZ-X2C
+    assign Ra aug-cc-PVTZ-X2C
+}
+
+set reference rhf
+
+molecule bacp {
+    0 1
+    symmetry c1
+
+    C
+    C 1 dcc
+    C 2 dcc 1 108
+    C 3 dcc 2 108 1 0
+    C 4 dcc 3 108 2 0
+    C 1 drr 2 90  3 90
+    C 2 drr 3 90  4 90
+    C 3 drr 4 90  5 90
+    C 8 dcc 7 108 6 0
+    C 9 dcc 8 108 7 0
+    H 1 dch 2 126 3 180
+    H 2 dch 3 126 4 180
+    H 3 dch 4 126 5 180
+    H 4 dch 5 126 1 180
+    H 5 dch 1 126 2 180
+    H 6 dch 7 126 8 180
+    H 7 dch 8 126 9 180
+    H 8 dch 9 126 10 180
+    H 9 dch 10 126 6 180
+    H 10 dch 6 126 7 180
+    Ba 1 dcba 11 achba 6 0
+    Ba 6 dcba 16 achba 1 0
+
+    dcc = 1.33
+    drr = 8.092
+    dch = 1.088
+    dcba = 1.930
+    achba = 128.09
+
+}
+
+set SCF_TYPE OUT_OF_CORE
+set SCF_INITIAL_ACCELERATOR NONE
+set MP2_TYPE CONV
+set CACHELEVEL 0
+set PRINT 2
+E, wfn = optimize("mp2/double_zeta", return_wfn = True)
+
+bacp.save_xyz_file(f"{out_dir}/{file_root}.xyz", True)
+
+fstr = ""
+with open(f"{out_dir}/{file_root}.xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
+
+with open("{out_dir}/{file_root}.xyz", "w") as fp :
+    print(fstr, file = fp)
+
+wfn.to_file("{out_dir}/{file_root}")
+cubeprop(wfn, CUBEPROP_FILEPATH = f"/home/vulcan/cgb31826/git/Dimagnesocene/{out_dir}/{file_root}_cube")
+fchk(wfn, "{out_dir}/{file_root}.fchk")
+--------------------------------------------------------------------------
+
+Scratch directory: /tmp/935197.1.gen4.q/
+gradient() will perform analytic gradient computation.
+   => Libint2 <=
+
+    Primary   basis highest AM E, G, H:  5, 4, 3
+    Auxiliary basis highest AM E, G, H:  6, 5, 4
+    Onebody   basis highest AM E, G, H:  6, 5, 4
+    Solid Harmonics ordering:            gaussian
+
+*** tstart() called on n067
+*** at Thu Sep 14 16:24:37 2023
+
+   => Loading Basis Set <=
+
+    Name: DOUBLE_ZETA
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-10  entry C          line   182 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvdz.gbs 
+    atoms 11-20 entry H          line    40 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvdz.gbs 
+    atoms 21-22 entry BA         line   340 file /home/vulcan/cgb31826/git/Dimagnesocene/in/aug-cc-pvdz-x2c.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        8 Threads,    500 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C2v
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         C            4.046000000000     0.000000000000     1.171626304184    12.000000000000
+         C            4.046000000000    -1.075992602519     0.389871918635    12.000000000000
+         C            4.046000000000    -0.665000000000    -0.875033248038    12.000000000000
+         C            4.046000000000     0.665000000000    -0.875033248038    12.000000000000
+         C            4.046000000000     1.075992602519     0.389871918635    12.000000000000
+         C           -4.046000000000     0.000000000000     1.171626304184    12.000000000000
+         C           -4.046000000000    -1.075992602519     0.389871918635    12.000000000000
+         C           -4.046000000000    -0.665000000000    -0.875033248038    12.000000000000
+         C           -4.046000000000     0.665000000000    -0.875033248038    12.000000000000
+         C           -4.046000000000     1.075992602519     0.389871918635    12.000000000000
+         H            4.046000000000     0.000000000000     2.259626304184     1.007825032230
+         H            4.046000000000    -2.110742092248     0.726082408515     1.007825032230
+         H            4.046000000000    -1.304510354494    -1.755243737918     1.007825032230
+         H            4.046000000000     1.304510354494    -1.755243737918     1.007825032230
+         H            4.046000000000     2.110742092248     0.726082408515     1.007825032230
+         H           -4.046000000000     0.000000000000     2.259626304184     1.007825032230
+         H           -4.046000000000    -2.110742092248     0.726082408515     1.007825032230
+         H           -4.046000000000    -1.304510354494    -1.755243737918     1.007825032230
+         H           -4.046000000000     1.304510354494    -1.755243737918     1.007825032230
+         H           -4.046000000000     2.110742092248     0.726082408515     1.007825032230
+         BA           2.527007583111     0.000000000000    -0.018987838783   137.905247000000
+         BA          -2.527007583111     0.000000000000    -0.018987838783   137.905247000000
+
+  Running in c1 symmetry.
+
+  Rotational constants: A =      0.08282  B =      0.00422  C =      0.00422 [cm^-1]
+  Rotational constants: A =   2482.82345  B =    126.58915  C =    126.57931 [MHz]
+  Nuclear repulsion = 2077.904938363722067
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 182
+  Nalpha       = 91
+  Nbeta        = 91
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is OUT_OF_CORE.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-10
+  Density threshold  = 1.00e-10
+  Integral threshold = 1.00e-12
+
+  ==> Primary Basis <==
+
+  -AO BASIS SET INFORMATION:
+    Name                   = DOUBLE_ZETA
+    Blend                  = AUG-CC-PVDZ + AUG-CC-PVDZ-X2C
+    Total number of shells = 180
+    Number of primitives   = 884
+    Number of AO           = 458
+    Number of SO           = 428
+    Maximum AM             = 2
+    Spherical Harmonics    = TRUE
+
+  -Contraction Scheme:
+    Atom   Type   All Primitives // Shells:
+   ------ ------ --------------------------
+       1     C     18s 5p 2d // 4s 3p 2d 
+       2     C     18s 5p 2d // 4s 3p 2d 
+       3     C     18s 5p 2d // 4s 3p 2d 
+       4     C     18s 5p 2d // 4s 3p 2d 
+       5     C     18s 5p 2d // 4s 3p 2d 
+       6     C     18s 5p 2d // 4s 3p 2d 
+       7     C     18s 5p 2d // 4s 3p 2d 
+       8     C     18s 5p 2d // 4s 3p 2d 
+       9     C     18s 5p 2d // 4s 3p 2d 
+      10     C     18s 5p 2d // 4s 3p 2d 
+      11     H     5s 2p // 3s 2p 
+      12     H     5s 2p // 3s 2p 
+      13     H     5s 2p // 3s 2p 
+      14     H     5s 2p // 3s 2p 
+      15     H     5s 2p // 3s 2p 
+      16     H     5s 2p // 3s 2p 
+      17     H     5s 2p // 3s 2p 
+      18     H     5s 2p // 3s 2p 
+      19     H     5s 2p // 3s 2p 
+      20     H     5s 2p // 3s 2p 
+      21    BA     146s 92p 44d // 8s 7p 5d 
+      22    BA     146s 92p 44d // 8s 7p 5d 
+
+  ==> Integral Setup <==
+
+  ==> DiskJK: Disk-Based J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    Memory [MiB]:              375
+    Schwarz Cutoff:          1E-12
+
+  Minimum eigenvalue in the overlap matrix is 2.8831180482E-06.
+  Reciprocal condition number of the overlap matrix is 1.8268629132E-07.
+    Using symmetric orthogonalization.
+
+  ==> Pre-Iterations <==
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF (no occupation information).
+
+   -------------------------
+    Irrep   Nso     Nmo    
+   -------------------------
+     A        428     428 
+   -------------------------
+    Total     428     428
+   -------------------------
+
+  ==> Iterations <==
+
+                        Total Energy        Delta E     RMS |[F,P]|
+
+   @RHF iter SAD: -15532.83354068234257   -1.55328e+04   0.00000e+00 
+   @RHF iter   1: -15529.78733996805749    3.04620e+00   3.86697e-03 DIIS
+   @RHF iter   2: -15529.44417694546428    3.43163e-01   4.23937e-03 DIIS
+   @RHF iter   3: -15531.08036667388296   -1.63619e+00   7.20952e-04 DIIS
+   @RHF iter   4: -15531.02825934350767    5.21073e-02   9.87144e-04 DIIS
+   @RHF iter   5: -15531.13254413374671   -1.04285e-01   2.86564e-04 DIIS
+   @RHF iter   6: -15531.14201872285412   -9.47459e-03   8.25415e-05 DIIS
+   @RHF iter   7: -15531.14287139613225   -8.52673e-04   3.41250e-05 DIIS
+   @RHF iter   8: -15531.14304199551043   -1.70599e-04   2.02333e-05 DIIS
+   @RHF iter   9: -15531.14311059887405   -6.86034e-05   1.15312e-05 DIIS
+   @RHF iter  10: -15531.14313502405639   -2.44252e-05   5.11693e-06 DIIS
+   @RHF iter  11: -15531.14314109053885   -6.06648e-06   2.20850e-06 DIIS
+   @RHF iter  12: -15531.14314209665099   -1.00611e-06   1.13813e-06 DIIS
+   @RHF iter  13: -15531.14314243323315   -3.36582e-07   4.14397e-07 DIIS
+   @RHF iter  14: -15531.14314251653559   -8.33024e-08   1.59699e-07 DIIS
+   @RHF iter  15: -15531.14314256227590   -4.57403e-08   1.21286e-07 DIIS
+   @RHF iter  16: -15531.14314259767343   -3.53975e-08   1.01889e-07 DIIS
+   @RHF iter  17: -15531.14314264052155   -4.28481e-08   7.85449e-08 DIIS
+   @RHF iter  18: -15531.14314268512317   -4.46016e-08   5.94013e-08 DIIS
+   @RHF iter  19: -15531.14314270561954   -2.04964e-08   3.77879e-08 DIIS
+   @RHF iter  20: -15531.14314270747491   -1.85537e-09   2.71564e-08 DIIS
+   @RHF iter  21: -15531.14314271608964   -8.61473e-09   2.32282e-08 DIIS
+   @RHF iter  22: -15531.14314271279000    3.29965e-09   1.75079e-08 DIIS
+   @RHF iter  23: -15531.14314270843170    4.35830e-09   1.16558e-08 DIIS
+   @RHF iter  24: -15531.14314271605690   -7.62520e-09   7.60357e-09 DIIS
+   @RHF iter  25: -15531.14314272256161   -6.50471e-09   3.51034e-09 DIIS
+   @RHF iter  26: -15531.14314271586409    6.69752e-09   3.69490e-09 DIIS
+   @RHF iter  27: -15531.14314271528565    5.78439e-10   1.68839e-09 DIIS
+   @RHF iter  28: -15531.14314271819239   -2.90675e-09   1.53409e-09 DIIS
+   @RHF iter  29: -15531.14314271563489    2.55750e-09   1.33253e-09 DIIS
+   @RHF iter  30: -15531.14314272160846   -5.97356e-09   1.32896e-09 DIIS
+   @RHF iter  31: -15531.14314272597403   -4.36557e-09   1.32874e-09 DIIS
+   @RHF iter  32: -15531.14314271568219    1.02918e-08   1.32865e-09 DIIS
+   @RHF iter  33: -15531.14314272384581   -8.16362e-09   1.33135e-09 DIIS
+   @RHF iter  34: -15531.14314271351395    1.03319e-08   1.33168e-09 DIIS
+   @RHF iter  35: -15531.14314271595867   -2.44472e-09   1.33019e-09 DIIS
+   @RHF iter  36: -15531.14314271368858    2.27010e-09   1.33750e-09 DIIS
+   @RHF iter  37: -15531.14314272331831   -9.62973e-09   1.34397e-09 DIIS
+   @RHF iter  38: -15531.14314271921467    4.10364e-09   1.33875e-09 DIIS
+   @RHF iter  39: -15531.14314271418334    5.03132e-09   1.34948e-09 DIIS
+   @RHF iter  40: -15531.14314272323463   -9.05129e-09   1.34387e-09 DIIS
+   @RHF iter  41: -15531.14314271303374    1.02009e-08   1.34168e-09 DIIS
+   @RHF iter  42: -15531.14314272105912   -8.02538e-09   1.34422e-09 DIIS
+   @RHF iter  43: -15531.14314271477997    6.27915e-09   1.34703e-09 DIIS
+   @RHF iter  44: -15531.14314272006959   -5.28962e-09   1.34311e-09 DIIS
+   @RHF iter  45: -15531.14314271854164    1.52795e-09   1.35555e-09 DIIS
+   @RHF iter  46: -15531.14314271595140    2.59024e-09   1.34686e-09 DIIS
+   @RHF iter  47: -15531.14314272801494   -1.20635e-08   1.34594e-09 DIIS
+   @RHF iter  48: -15531.14314271568583    1.23291e-08   1.34423e-09 DIIS
+   @RHF iter  49: -15531.14314272077536   -5.08953e-09   1.34698e-09 DIIS
+   @RHF iter  50: -15531.14314271693002    3.84534e-09   1.33974e-09 DIIS
+   @RHF iter  51: -15531.14314273405398   -1.71240e-08   1.35367e-09 DIIS
+   @RHF iter  52: -15531.14314271436524    1.96887e-08   1.35908e-09 DIIS
+   @RHF iter  53: -15531.14314272167030   -7.30506e-09   1.34639e-09 DIIS
+   @RHF iter  54: -15531.14314271818876    3.48155e-09   1.34615e-09 DIIS
+   @RHF iter  55: -15531.14314272133925   -3.15049e-09   1.34396e-09 DIIS
+   @RHF iter  56: -15531.14314271784315    3.49610e-09   1.34757e-09 DIIS
+   @RHF iter  57: -15531.14314271588228    1.96087e-09   1.35169e-09 DIIS
+   @RHF iter  58: -15531.14314272609408   -1.02118e-08   1.34022e-09 DIIS
+   @RHF iter  59: -15531.14314271817784    7.91624e-09   1.34189e-09 DIIS
+   @RHF iter  60: -15531.14314272077172   -2.59388e-09   1.34870e-09 DIIS
+   @RHF iter  61: -15531.14314271532930    5.44242e-09   1.34245e-09 DIIS
+   @RHF iter  62: -15531.14314272524643   -9.91713e-09   1.34519e-09 DIIS
+   @RHF iter  63: -15531.14314272394768    1.29876e-09   1.34695e-09 DIIS
+   @RHF iter  64: -15531.14314272084448    3.10320e-09   1.34614e-09 DIIS
+   @RHF iter  65: -15531.14314270894101    1.19035e-08   1.34586e-09 DIIS
+   @RHF iter  66: -15531.14314271878175   -9.84073e-09   1.34579e-09 DIIS
+   @RHF iter  67: -15531.14314272000411   -1.22236e-09   1.34808e-09 DIIS
+   @RHF iter  68: -15531.14314271716648    2.83762e-09   1.35109e-09 DIIS
+   @RHF iter  69: -15531.14314272443517   -7.26868e-09   1.34650e-09 DIIS
+   @RHF iter  70: -15531.14314271970943    4.72573e-09   1.34258e-09 DIIS
+   @RHF iter  71: -15531.14314271736293    2.34650e-09   1.34080e-09 DIIS
+   @RHF iter  72: -15531.14314271327021    4.09273e-09   1.34485e-09 DIIS
+   @RHF iter  73: -15531.14314272212505   -8.85484e-09   1.34847e-09 DIIS
+   @RHF iter  74: -15531.14314272784759   -5.72254e-09   1.34615e-09 DIIS
+   @RHF iter  75: -15531.14314271790499    9.94260e-09   1.34350e-09 DIIS
+   @RHF iter  76: -15531.14314271160401    6.30098e-09   1.34590e-09 DIIS
+   @RHF iter  77: -15531.14314271526746   -3.66344e-09   1.34390e-09 DIIS
+   @RHF iter  78: -15531.14314272106276   -5.79530e-09   1.34902e-09 DIIS
+   @RHF iter  79: -15531.14314272423144   -3.16868e-09   1.35650e-09 DIIS
+   @RHF iter  80: -15531.14314272189586    2.33558e-09   1.34645e-09 DIIS
+   @RHF iter  81: -15531.14314272366028   -1.76442e-09   1.34617e-09 DIIS
+   @RHF iter  82: -15531.14314271968033    3.97995e-09   1.34990e-09 DIIS
+   @RHF iter  83: -15531.14314271859621    1.08412e-09   1.34014e-09 DIIS
+   @RHF iter  84: -15531.14314271395779    4.63842e-09   1.34765e-09 DIIS
+   @RHF iter  85: -15531.14314272571210   -1.17543e-08   1.34318e-09 DIIS
+   @RHF iter  86: -15531.14314271973853    5.97356e-09   1.34618e-09 DIIS
+   @RHF iter  87: -15531.14314272319825   -3.45972e-09   1.34177e-09 DIIS
+   @RHF iter  88: -15531.14314272284173    3.56522e-10   1.34859e-09 DIIS
+   @RHF iter  89: -15531.14314271902913    3.81260e-09   1.35128e-09 DIIS
+   @RHF iter  90: -15531.14314272081901   -1.78989e-09   1.34352e-09 DIIS
+   @RHF iter  91: -15531.14314271105468    9.76434e-09   1.34717e-09 DIIS
+   @RHF iter  92: -15531.14314271948024   -8.42556e-09   1.34639e-09 DIIS
+   @RHF iter  93: -15531.14314272168485   -2.20462e-09   1.34573e-09 DIIS
+   @RHF iter  94: -15531.14314271405237    7.63248e-09   1.34222e-09 DIIS
+   @RHF iter  95: -15531.14314271963667   -5.58430e-09   1.34372e-09 DIIS
+   @RHF iter  96: -15531.14314272258707   -2.95040e-09   1.34805e-09 DIIS
+   @RHF iter  97: -15531.14314271563126    6.95582e-09   1.34406e-09 DIIS
+   @RHF iter  98: -15531.14314272065894   -5.02769e-09   1.34189e-09 DIIS
+   @RHF iter  99: -15531.14314272686534   -6.20639e-09   1.34584e-09 DIIS
+   @RHF iter 100: -15531.14314271647527    1.03901e-08   1.34081e-09 DIIS
+
+PsiException: Could not converge SCF iterations in 100 iterations.
+
+  Failed to converge.
+
+Traceback (most recent call last):
+  File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
+    exec(content)
+  File "<string>", line 84, in <module>
+  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 1245, in optimize
+    G, wfn = gradient(lowername, return_wfn=True, molecule=molecule, **kwargs)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 639, in gradient
+    wfn = procedures['gradient'][lowername](lowername, molecule=molecule, **kwargs)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 203, in select_mp2_gradient
+    return func(name, **kwargs)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 2522, in run_occ_gradient
+    ref_wfn = scf_helper(name, **kwargs)  # C1 certified
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 1873, in scf_helper
+    e_scf = scf_wfn.compute_energy()
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/scf_proc/scf_iterator.py", line 92, in scf_compute_energy
+    raise e
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/scf_proc/scf_iterator.py", line 85, in scf_compute_energy
+    self.iterations()
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/scf_proc/scf_iterator.py", line 526, in scf_iterate
+    raise SCFConvergenceError("""SCF iterations""", self.iteration_, self, Ediff, Dnorm)
+
+psi4.driver.p4util.exceptions.SCFConvergenceError: Could not converge SCF iterations in 100 iterations.
+
+
+Printing out the relevant lines from the Psithon --> Python processed input file:
+    core.set_global_option("SCF_TYPE", "OUT_OF_CORE")
+    core.set_global_option("SCF_INITIAL_ACCELERATOR", "NONE")
+    core.set_global_option("MP2_TYPE", "CONV")
+    core.set_global_option("CACHELEVEL", 0)
+    core.set_global_option("PRINT", 2)
+--> E, wfn = optimize("mp2/double_zeta", return_wfn = True)
+    bacp.save_xyz_file(f"{out_dir}/{file_root}.xyz", True)
+    fstr = ""
+    with open(f"{out_dir}/{file_root}.xyz", "r") as fp :
+        for line in fp :
+            newline = line[0]
+
+!-------------------------------------------------------!
+!                                                       !
+!  Could not converge SCF iterations in 100 iterations. !
+!                                                       !
+!-------------------------------------------------------!
+
+    Psi4 stopped on: Friday, 15 September 2023 04:07AM
+    Psi4 wall time for execution: 11:43:12.48
+
+*** Psi4 encountered an error. Buy a developer more coffee!
+*** Resources and help at github.com/psi4/psi4.

@@ -1,0 +1,25 @@
+
+***********************************************************************
+ Starting job:
+
+    Name:              nmr_test
+    ID:                935160
+    Hostname:          n061
+    Working directory: /home/vulcan/cgb31826/git/Dimagnesocene/in
+
+    Submitted using:   submit -n 8 -N nmr_test -i nmr_test.zmat gen4.q,gen6.q cfour@2.0~mpi+vectorization
+***********************************************************************
+module load  cfour-2.0-intel-13.0.0-yhj426etc3g7hslvbmpgvdymp2w76rob
+ Running cfour on n061
+ Running calculation...
+ @GETMEM-I,  Allocated      76 MB of main memory.
+Not a Frequency Job, No Conversion Necessary.
+ Saving data and cleaning up...
+OPTARC
+JOBARC
+JAINDX
+FJOBARC
+MOLDEN
+NEWMOS
+den.dat
+ Job complete on n061.

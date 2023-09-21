@@ -2,6 +2,7 @@ import math
 import numpy as np
 
 set reference rhf
+memory 24 GB
 
 molecule becp {
     0 1
@@ -32,12 +33,10 @@ Mg   -1.370277208974   -0.023879134755   -0.001080310946
  H    0.010079893083   -1.276599718054   -0.003531297116
 }
 
-set SCF_TYPE OUT_OF_CORE
-set SCF_INITIAL_ACCELERATOR NONE
-set CACHELEVEL 0
+set CACHELEVEL 1
 set PRINT 2
 
-E, wfn = optimize("ccsd/aug-cc-pVDZ", return_wfn = True)
+E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
 becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
 

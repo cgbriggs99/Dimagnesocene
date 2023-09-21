@@ -1,5 +1,5 @@
 import math
-
+memory 24 GB
 set reference uhf
 
 molecule becp {
@@ -26,19 +26,16 @@ molecule becp {
     H  -3.4293258986  -0.6966185557   2.2347905557
     H  -3.4373410950  -2.2620962097   0.0162875789
     H  -3.4585506915  -0.6378475120  -2.1560694624
-    Mg   1.3822048322  -0.0474279597  -0.0392749528
+    Mg   1.2622048322  -0.0474279597  -0.0392749528
     Mg  -1.3802547353   0.0431456647   0.0165481467
 }
 
 set OPT_TYPE TS
 set GEOM_MAXITER 150
-set SCF_TYPE OUT_OF_CORE
-set SCF_INITIAL_ACCELERATOR NONE
-set CACHELEVEL 0
+set CACHELEVEL 1
 set PRINT 2
 
-optimize("ccsd/aug-cc-pVTZ")
-E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
+E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
 becp.save_xyz_file("out/dimagnesocene-.xyz", True)
 

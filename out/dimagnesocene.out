@@ -632,3 +632,68 @@ Total time:
 	(OO|OO)...
 	Presorting SO-basis two-electron integrals.
 	Sorting File: SO Ints (nn|nn) nbuckets = 1495
+
+Traceback (most recent call last):
+  File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
+    exec(content)
+  File "<string>", line 57, in <module>
+  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 1245, in optimize
+    G, wfn = gradient(lowername, return_wfn=True, molecule=molecule, **kwargs)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 639, in gradient
+    wfn = procedures['gradient'][lowername](lowername, molecule=molecule, **kwargs)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 906, in select_ccsd_gradient
+    return func(name, **kwargs)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 2936, in run_ccenergy_gradient
+    ccwfn = run_ccenergy(name, **kwargs)
+  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 2898, in run_ccenergy
+    core.cctransort(ref_wfn)
+
+RuntimeError: 
+Fatal Error: WRITE failed. Only some of the bytes were written!
+Error writing a full page, unit 41.
+PSIO_ERROR: 12 (error writing to file)
+
+Error occurred in file: /tmp/psi4/psi4/src/psi4/libpsio/error.cc on line: 134
+The most recent 5 function calls were:
+
+psi::PsiException::PsiException(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char const*, int)
+psi::PSIO::rw(unsigned long, char*, psi::psio_address, unsigned long, int)
+psi::PSIO::write(unsigned long, char const*, char*, unsigned long, psi::psio_address, psi::psio_address*)
+psi::IntegralTransform::presort_so_tei()
+
+
+
+Printing out the relevant lines from the Psithon --> Python processed input file:
+    core.IO.set_default_namespace("becp")
+    core.set_global_option("SCF_TYPE", "OUT_OF_CORE")
+    core.set_global_option("SCF_INITIAL_ACCELERATOR", "NONE")
+    core.set_global_option("CACHELEVEL", 0)
+    core.set_global_option("PRINT", 2)
+--> optimize("ccsd/aug-cc-pVTZ")
+    E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
+    becp.save_xyz_file("out/dimagnesocene.xyz", True)
+    fstr = ""
+    with open("out/dimagnesocene.xyz", "r") as fp :
+        for line in fp :
+
+!----------------------------------------------------------------------------------!
+!                                                                                  !
+! Fatal Error: WRITE failed. Only some of the bytes were written!                  !
+! Error writing a full page, unit 41.                                              !
+! PSIO_ERROR: 12 (error writing to file)                                           !
+! Error occurred in file: /tmp/psi4/psi4/src/psi4/libpsio/error.cc on line: 134    !
+! The most recent 5 function calls were:                                           !
+! psi::PsiException::PsiException(std::__cxx11::basic_string<char,                 !
+!     std::char_traits<char>, std::allocator<char> >, char const*, int)            !
+! psi::PSIO::rw(unsigned long, char*, psi::psio_address, unsigned long, int)       !
+! psi::PSIO::write(unsigned long, char const*, char*, unsigned long,               !
+!     psi::psio_address, psi::psio_address*)                                       !
+! psi::IntegralTransform::presort_so_tei()                                         !
+!                                                                                  !
+!----------------------------------------------------------------------------------!
+
+    Psi4 stopped on: Thursday, 14 September 2023 08:03PM
+    Psi4 wall time for execution: 1 day, 7:30:59.41
+
+*** Psi4 encountered an error. Buy a developer more coffee!
+*** Resources and help at github.com/psi4/psi4.

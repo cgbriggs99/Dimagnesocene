@@ -1,0 +1,12 @@
+
+***********************************************************************
+ Starting job:
+
+    Name:              dimgcp_opt
+    ID:                935494
+    Hostname:          n066
+    Working directory: /home/vulcan/cgb31826/git/Dimagnesocene
+
+    Submitted using:   submit -n 8 -N dimgcp_opt -i in/magnesium/dimagnesocene.in -o out/magnesium/dimagnesocene.out gen4.q psi4@master
+***********************************************************************
+module load  psi4-master-intel-16.0.1-avducsgnonqrcpftiesq432gagal6y7r

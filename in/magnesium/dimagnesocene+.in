@@ -1,5 +1,6 @@
 import math
 
+memory 24 GB
 set reference uhf
 
 molecule becp {
@@ -37,10 +38,9 @@ molecule becp {
 
 }
 
-set SCF_TYPE OUT_OF_CORE
-set CACHELEVEL 0
+set CACHELEVEL 1
 set PRINT 2
-E, wfn = optimize("ccsd/aug-cc-pVTZ", return_wfn = True)
+E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
 
 becp.save_xyz_file("out/dimagnesocene+.xyz", True)

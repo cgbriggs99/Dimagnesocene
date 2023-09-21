@@ -1,29 +1,30 @@
 
 import os
 
+memory 30 GB
 # Set the Pis4 path for the basis sets.
-if 'PSIPATH' is in os.environ :
-    os.environ['PSIPATH'] = os.environ['PSIPATH'] + ":/home/vulcan/connor/git/Dimagnesocene/in"
+if 'PSIPATH' in os.environ :
+    os.environ['PSIPATH'] = os.environ['PSIPATH'] + ":/home/vulcan/cgb31826/git/Dimagnesocene/in"
 else :
-    os.environ['PSIPATH'] = "/home/vulcan/connor/git/Dimagnesocene/in"
+    os.environ['PSIPATH'] = "/home/vulcan/cgb31826/git/Dimagnesocene/in"
 
 out_dir = "out/calcium"
 file_root = "dicalcicene"
 
-double_zeta {
-    assign aug-ccPVDZ
-    assign Ca aug-ccPVDZ-X2C
-    assign Sr aug-ccPVDZ-X2C
-    assign Ba aug-ccPVDZ-X2C
-    assign Ra aug-ccPVDZ-X2C
+basis double_zeta {
+    assign aug-cc-PVDZ
+    assign Ca aug-cc-PVDZ-X2C
+    assign Sr aug-cc-PVDZ-X2C
+    assign Ba aug-cc-PVDZ-X2C
+    assign Ra aug-cc-PVDZ-X2C
 }
 
-triple_zeta {
-    assign aug-ccPVTZ
-    assign Ca aug-ccPVTZ-X2C
-    assign Sr aug-ccPVTZ-X2C
-    assign Ba aug-ccPVTZ-X2C
-    assign Ra aug-ccPVTZ-X2C
+basis triple_zeta {
+    assign aug-cc-PVTZ
+    assign Ca aug-cc-PVTZ-X2C
+    assign Sr aug-cc-PVTZ-X2C
+    assign Ba aug-cc-PVTZ-X2C
+    assign Ra aug-cc-PVTZ-X2C
 }
 
 set reference rhf
@@ -63,11 +64,11 @@ molecule cacp {
 
 }
 
-set SCF_TYPE OUT_OF_CORE
 set SCF_INITIAL_ACCELERATOR NONE
 set CACHELEVEL 0
 set PRINT 2
-E, wfn = optimize("mp2/double_zeta", return_wfn = True)
+
+E, wfn = optimize("b3lyp/double_zeta", return_wfn = True)
 
 cacp.save_xyz_file(f"{out_dir}/{file_root}.xyz", True)
 

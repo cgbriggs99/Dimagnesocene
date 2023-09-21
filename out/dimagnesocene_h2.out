@@ -31,10 +31,10 @@
     -----------------------------------------------------------------------
 
 
-    Psi4 started on: Wednesday, 13 September 2023 12:33PM
+    Psi4 started on: Thursday, 14 September 2023 08:56AM
 
-    Process ID: 2418
-    Host:       n049
+    Process ID: 18279
+    Host:       n027
     PSIDATADIR: /opt/psi/4/1.9a/share/psi4
     Memory:     500.0 MiB
     Threads:    8
@@ -81,8 +81,7 @@ set SCF_INITIAL_ACCELERATOR NONE
 set CACHELEVEL 0
 set PRINT 2
 
-optimize("ccsd/aug-cc-pVTZ")
-E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
+E, wfn = optimize("ccsd/aug-cc-pVDZ", return_wfn = True)
 
 becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
 
@@ -108,7 +107,7 @@ except Exception :
     fchk(wfn, "out/dimagnesocene_h2.fchk")
 --------------------------------------------------------------------------
 
-Scratch directory: /tmp/935122.1.gen4.q/
+Scratch directory: /tmp/935128.1.gen4.q/
 gradient() will perform analytic gradient computation.
    => Libint2 <=
 
@@ -117,17 +116,17 @@ gradient() will perform analytic gradient computation.
     Onebody   basis highest AM E, G, H:  6, 5, 4
     Solid Harmonics ordering:            gaussian
 
-*** tstart() called on n049
-*** at Wed Sep 13 12:33:39 2023
+*** tstart() called on n027
+*** at Thu Sep 14 08:56:09 2023
 
    => Loading Basis Set <=
 
-    Name: AUG-CC-PVTZ
+    Name: AUG-CC-PVDZ
     Role: ORBITAL
     Keyword: BASIS
-    atoms 1-10         entry C          line   239 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvtz.gbs 
-    atoms 11-20, 23-24 entry H          line    40 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvtz.gbs 
-    atoms 21-22        entry MG         line   566 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvtz.gbs 
+    atoms 1-10         entry C          line   182 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvdz.gbs 
+    atoms 11-20, 23-24 entry H          line    40 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvdz.gbs 
+    atoms 21-22        entry MG         line   433 file /opt/psi/4/1.9a/share/psi4/basis/aug-cc-pvdz.gbs 
 
 
          ---------------------------------------------------------
@@ -198,115 +197,398 @@ gradient() will perform analytic gradient computation.
   ==> Primary Basis <==
 
   -AO BASIS SET INFORMATION:
-    Name                   = AUG-CC-PVTZ
-    Blend                  = AUG-CC-PVTZ
-    Total number of shells = 280
-    Number of primitives   = 584
-    Number of AO           = 968
-    Number of SO           = 836
-    Maximum AM             = 3
+    Name                   = AUG-CC-PVDZ
+    Blend                  = AUG-CC-PVDZ
+    Total number of shells = 172
+    Number of primitives   = 450
+    Number of AO           = 416
+    Number of SO           = 392
+    Maximum AM             = 2
     Spherical Harmonics    = TRUE
 
   -Contraction Scheme:
     Atom   Type   All Primitives // Shells:
    ------ ------ --------------------------
-       1     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       2     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       3     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       4     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       5     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       6     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       7     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       8     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-       9     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-      10     C     19s 6p 3d 2f // 5s 4p 3d 2f 
-      11     H     6s 3p 2d // 4s 3p 2d 
-      12     H     6s 3p 2d // 4s 3p 2d 
-      13     H     6s 3p 2d // 4s 3p 2d 
-      14     H     6s 3p 2d // 4s 3p 2d 
-      15     H     6s 3p 2d // 4s 3p 2d 
-      16     H     6s 3p 2d // 4s 3p 2d 
-      17     H     6s 3p 2d // 4s 3p 2d 
-      18     H     6s 3p 2d // 4s 3p 2d 
-      19     H     6s 3p 2d // 4s 3p 2d 
-      20     H     6s 3p 2d // 4s 3p 2d 
-      21    MG     48s 23p 3d 2f // 6s 5p 3d 2f 
-      22    MG     48s 23p 3d 2f // 6s 5p 3d 2f 
-      23     H     6s 3p 2d // 4s 3p 2d 
-      24     H     6s 3p 2d // 4s 3p 2d 
+       1     C     18s 5p 2d // 4s 3p 2d 
+       2     C     18s 5p 2d // 4s 3p 2d 
+       3     C     18s 5p 2d // 4s 3p 2d 
+       4     C     18s 5p 2d // 4s 3p 2d 
+       5     C     18s 5p 2d // 4s 3p 2d 
+       6     C     18s 5p 2d // 4s 3p 2d 
+       7     C     18s 5p 2d // 4s 3p 2d 
+       8     C     18s 5p 2d // 4s 3p 2d 
+       9     C     18s 5p 2d // 4s 3p 2d 
+      10     C     18s 5p 2d // 4s 3p 2d 
+      11     H     5s 2p // 3s 2p 
+      12     H     5s 2p // 3s 2p 
+      13     H     5s 2p // 3s 2p 
+      14     H     5s 2p // 3s 2p 
+      15     H     5s 2p // 3s 2p 
+      16     H     5s 2p // 3s 2p 
+      17     H     5s 2p // 3s 2p 
+      18     H     5s 2p // 3s 2p 
+      19     H     5s 2p // 3s 2p 
+      20     H     5s 2p // 3s 2p 
+      21    MG     38s 18p 2d // 5s 4p 2d 
+      22    MG     38s 18p 2d // 5s 4p 2d 
+      23     H     5s 2p // 3s 2p 
+      24     H     5s 2p // 3s 2p 
 
   ==> Integral Setup <==
 
+  ==> DiskJK: Disk-Based J/K Matrices <==
 
-Traceback (most recent call last):
-  File "/opt/psi/4/1.9a/bin/psi4", line 372, in <module>
-    exec(content)
-  File "<string>", line 54, in <module>
-  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 1245, in optimize
-    G, wfn = gradient(lowername, return_wfn=True, molecule=molecule, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/driver.py", line 639, in gradient
-    wfn = procedures['gradient'][lowername](lowername, molecule=molecule, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 906, in select_ccsd_gradient
-    return func(name, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 2936, in run_ccenergy_gradient
-    ccwfn = run_ccenergy(name, **kwargs)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 2880, in run_ccenergy
-    ref_wfn = scf_helper(name, **kwargs)  # C1 certified
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/proc.py", line 1873, in scf_helper
-    e_scf = scf_wfn.compute_energy()
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/scf_proc/scf_iterator.py", line 82, in scf_compute_energy
-    self.initialize()
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/scf_proc/scf_iterator.py", line 192, in scf_initialize
-    self.initialize_jk(self.memory_jk_, jk=jk)
-  File "/opt/psi/4/1.9a/lib/psi4/driver/procrouting/scf_proc/scf_iterator.py", line 127, in initialize_jk
-    jk.initialize()
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    Memory [MiB]:              375
+    Schwarz Cutoff:          1E-12
 
-RuntimeError: 
-Fatal Error: WRITE failed. Only some of the bytes were written!
-Error writing the first partial page, unit 33.
-PSIO_ERROR: 12 (error writing to file)
+  Minimum eigenvalue in the overlap matrix is 7.3643842799E-06.
+  Reciprocal condition number of the overlap matrix is 4.2787730227E-07.
+    Using symmetric orthogonalization.
 
-Error occurred in file: /tmp/psi4/psi4/src/psi4/libpsio/error.cc on line: 134
-The most recent 5 function calls were:
+  ==> Pre-Iterations <==
 
-psi::PsiException::PsiException(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char const*, int)
-psi::PSIO::rw(unsigned long, char*, psi::psio_address, unsigned long, int)
-psi::PSIO::write(unsigned long, char const*, char*, unsigned long, psi::psio_address, psi::psio_address*)
-psi::IWL::put()
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF (no occupation information).
+
+   -------------------------
+    Irrep   Nso     Nmo    
+   -------------------------
+     A        392     392 
+   -------------------------
+    Total     392     392
+   -------------------------
+
+  ==> Iterations <==
+
+                        Total Energy        Delta E     RMS |[F,P]|
+
+   @RHF iter SAD:  -784.45852058697085   -7.84459e+02   0.00000e+00 
+   @RHF iter   1:  -784.46726523930272   -8.74465e-03   2.22586e-03 DIIS
+   @RHF iter   2:  -784.79552108192399   -3.28256e-01   1.29572e-03 DIIS
+   @RHF iter   3:  -784.93047821442030   -1.34957e-01   1.46923e-04 DIIS
+   @RHF iter   4:  -784.93370496684418   -3.22675e-03   2.60286e-05 DIIS
+   @RHF iter   5:  -784.93378869545529   -8.37286e-05   7.23565e-06 DIIS
+   @RHF iter   6:  -784.93379609529404   -7.39984e-06   1.24014e-06 DIIS
+   @RHF iter   7:  -784.93379644971799   -3.54424e-07   3.05837e-07 DIIS
+   @RHF iter   8:  -784.93379648048096   -3.07630e-08   1.20465e-07 DIIS
+   @RHF iter   9:  -784.93379648674261   -6.26164e-09   7.10772e-08 DIIS
+   @RHF iter  10:  -784.93379648829966   -1.55705e-09   2.09903e-08 DIIS
+   @RHF iter  11:  -784.93379648845519   -1.55524e-10   7.68540e-09 DIIS
+   @RHF iter  12:  -784.93379648846746   -1.22782e-11   3.00985e-09 DIIS
+   @RHF iter  13:  -784.93379648847429   -6.82121e-12   5.74184e-10 DIIS
+   @RHF iter  14:  -784.93379648846587    8.41283e-12   2.55633e-10 DIIS
+   @RHF iter  15:  -784.93379648847338   -7.50333e-12   4.75443e-11 DIIS
+  Energy and wave function converged.
 
 
+  ==> Post-Iterations <==
 
-Printing out the relevant lines from the Psithon --> Python processed input file:
-    core.IO.set_default_namespace("becp")
-    core.set_global_option("SCF_TYPE", "OUT_OF_CORE")
-    core.set_global_option("SCF_INITIAL_ACCELERATOR", "NONE")
-    core.set_global_option("CACHELEVEL", 0)
-    core.set_global_option("PRINT", 2)
---> optimize("ccsd/aug-cc-pVTZ")
-    E, wfn = energy("ccsd/aug-cc-pVTZ", return_wfn = True)
-    becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
-    fstr = ""
-    with open("out/dimagnesocene_h2.xyz", "r") as fp :
-        for line in fp :
+    Orbital Energies [Eh]
+    ---------------------
 
-!----------------------------------------------------------------------------------!
-!                                                                                  !
-! Fatal Error: WRITE failed. Only some of the bytes were written!                  !
-! Error writing the first partial page, unit 33.                                   !
-! PSIO_ERROR: 12 (error writing to file)                                           !
-! Error occurred in file: /tmp/psi4/psi4/src/psi4/libpsio/error.cc on line: 134    !
-! The most recent 5 function calls were:                                           !
-! psi::PsiException::PsiException(std::__cxx11::basic_string<char,                 !
-!     std::char_traits<char>, std::allocator<char> >, char const*, int)            !
-! psi::PSIO::rw(unsigned long, char*, psi::psio_address, unsigned long, int)       !
-! psi::PSIO::write(unsigned long, char const*, char*, unsigned long,               !
-!     psi::psio_address, psi::psio_address*)                                       !
-! psi::IWL::put()                                                                  !
-!                                                                                  !
-!----------------------------------------------------------------------------------!
+    Doubly Occupied:                                                      
 
-    Psi4 stopped on: Wednesday, 13 September 2023 02:18PM
-    Psi4 wall time for execution: 1:45:23.27
+       1A    -49.021579     2A    -49.021562     3A    -11.238474  
+       4A    -11.238373     5A    -11.238171     6A    -11.238061  
+       7A    -11.237266     8A    -11.237249     9A    -11.236312  
+      10A    -11.236276    11A    -11.236233    12A    -11.236158  
+      13A     -3.762128    14A     -3.761987    15A     -2.284487  
+      16A     -2.284331    17A     -2.284162    18A     -2.282936  
+      19A     -2.282613    20A     -2.282297    21A     -1.160834  
+      22A     -1.160773    23A     -0.953792    24A     -0.953753  
+      25A     -0.952855    26A     -0.952775    27A     -0.734559  
+      28A     -0.734455    29A     -0.734358    30A     -0.734353  
+      31A     -0.698127    32A     -0.698062    33A     -0.549806  
+      34A     -0.545695    35A     -0.545657    36A     -0.545011  
+      37A     -0.544905    38A     -0.534675    39A     -0.518683  
+      40A     -0.518613    41A     -0.518605    42A     -0.518551  
+      43A     -0.475489    44A     -0.393054    45A     -0.318897  
+      46A     -0.317576    47A     -0.317205    48A     -0.304809  
 
-*** Psi4 encountered an error. Buy a developer more coffee!
-*** Resources and help at github.com/psi4/psi4.
+    Virtual:                                                              
+
+      49A      0.018955    50A      0.020730    51A      0.021630  
+      52A      0.021844    53A      0.027530    54A      0.028320  
+      55A      0.033711    56A      0.053904    57A      0.053937  
+      58A      0.064388    59A      0.066192    60A      0.068055  
+      61A      0.068843    62A      0.072429    63A      0.081611  
+      64A      0.083022    65A      0.084844    66A      0.088310  
+      67A      0.096042    68A      0.103076    69A      0.106493  
+      70A      0.108069    71A      0.116824    72A      0.121542  
+      73A      0.123337    74A      0.123700    75A      0.126057  
+      76A      0.129380    77A      0.130575    78A      0.131549  
+      79A      0.133472    80A      0.133492    81A      0.144815  
+      82A      0.145273    83A      0.153256    84A      0.159033  
+      85A      0.172890    86A      0.173213    87A      0.174287  
+      88A      0.174719    89A      0.175957    90A      0.185567  
+      91A      0.185950    92A      0.187143    93A      0.195003  
+      94A      0.196976    95A      0.197973    96A      0.202749  
+      97A      0.207077    98A      0.207449    99A      0.209325  
+     100A      0.211142   101A      0.214317   102A      0.214750  
+     103A      0.223370   104A      0.227603   105A      0.229821  
+     106A      0.233301   107A      0.234047   108A      0.241114  
+     109A      0.252063   110A      0.258439   111A      0.264268  
+     112A      0.294993   113A      0.295253   114A      0.309650  
+     115A      0.309798   116A      0.310854   117A      0.311597  
+     118A      0.312101   119A      0.316952   120A      0.328089  
+     121A      0.328473   122A      0.329086   123A      0.338575  
+     124A      0.351418   125A      0.361985   126A      0.371184  
+     127A      0.372234   128A      0.375801   129A      0.378642  
+     130A      0.379912   131A      0.381262   132A      0.385844  
+     133A      0.387638   134A      0.390006   135A      0.394480  
+     136A      0.406683   137A      0.412124   138A      0.415386  
+     139A      0.424912   140A      0.425189   141A      0.425859  
+     142A      0.431062   143A      0.439840   144A      0.442480  
+     145A      0.444896   146A      0.446017   147A      0.447214  
+     148A      0.447346   149A      0.458281   150A      0.462895  
+     151A      0.482176   152A      0.483109   153A      0.494841  
+     154A      0.498176   155A      0.502197   156A      0.511837  
+     157A      0.514281   158A      0.519180   159A      0.520183  
+     160A      0.530501   161A      0.533764   162A      0.533970  
+     163A      0.547872   164A      0.548661   165A      0.564872  
+     166A      0.573155   167A      0.582954   168A      0.594645  
+     169A      0.595229   170A      0.599108   171A      0.602473  
+     172A      0.602839   173A      0.613577   174A      0.633611  
+     175A      0.635375   176A      0.637216   177A      0.638481  
+     178A      0.641470   179A      0.644180   180A      0.649259  
+     181A      0.652057   182A      0.659133   183A      0.659759  
+     184A      0.661194   185A      0.668018   186A      0.670577  
+     187A      0.673199   188A      0.679691   189A      0.681713  
+     190A      0.686371   191A      0.688752   192A      0.688894  
+     193A      0.691646   194A      0.697649   195A      0.703243  
+     196A      0.709998   197A      0.712246   198A      0.712864  
+     199A      0.715790   200A      0.716308   201A      0.725486  
+     202A      0.730283   203A      0.737123   204A      0.743463  
+     205A      0.748012   206A      0.763135   207A      0.769786  
+     208A      0.776884   209A      0.792724   210A      0.801794  
+     211A      0.807589   212A      0.811819   213A      0.821816  
+     214A      0.822784   215A      0.835183   216A      0.836055  
+     217A      0.840069   218A      0.843713   219A      0.845543  
+     220A      0.850692   221A      0.871421   222A      0.883507  
+     223A      0.900182   224A      0.902502   225A      0.911206  
+     226A      0.911444   227A      0.913293   228A      0.913891  
+     229A      0.924725   230A      0.938067   231A      0.940960  
+     232A      0.946769   233A      0.954499   234A      0.956037  
+     235A      0.958597   236A      0.959077   237A      0.966010  
+     238A      0.975359   239A      0.975637   240A      0.990358  
+     241A      1.030203   242A      1.033047   243A      1.033799  
+     244A      1.040602   245A      1.050961   246A      1.054431  
+     247A      1.085388   248A      1.089322   249A      1.091630  
+     250A      1.110677   251A      1.111734   252A      1.118408  
+     253A      1.171081   254A      1.242196   255A      1.248028  
+     256A      1.248602   257A      1.252267   258A      1.255049  
+     259A      1.302592   260A      1.322587   261A      1.324292  
+     262A      1.329604   263A      1.334017   264A      1.346770  
+     265A      1.372825   266A      1.373712   267A      1.395083  
+     268A      1.398469   269A      1.399718   270A      1.407191  
+     271A      1.410317   272A      1.410458   273A      1.442439  
+     274A      1.478929   275A      1.544473   276A      1.550883  
+     277A      1.555237   278A      1.560471   279A      1.566238  
+     280A      1.568795   281A      1.604421   282A      1.635368  
+     283A      1.643239   284A      1.647038   285A      1.653501  
+     286A      1.655422   287A      1.655945   288A      1.660524  
+     289A      1.667882   290A      1.695430   291A      1.719671  
+     292A      1.720555   293A      1.731502   294A      1.748395  
+     295A      1.756864   296A      1.780385   297A      1.784167  
+     298A      1.790861   299A      1.808156   300A      1.823954  
+     301A      1.824794   302A      1.827992   303A      1.835485  
+     304A      1.841428   305A      1.842325   306A      1.860574  
+     307A      1.893567   308A      1.898966   309A      1.899178  
+     310A      1.899276   311A      1.917938   312A      1.939326  
+     313A      1.963649   314A      1.967297   315A      1.968118  
+     316A      1.969438   317A      1.981414   318A      1.983881  
+     319A      1.988942   320A      1.993352   321A      2.019623  
+     322A      2.079983   323A      2.104624   324A      2.118057  
+     325A      2.121934   326A      2.125111   327A      2.125603  
+     328A      2.155279   329A      2.158277   330A      2.175794  
+     331A      2.184079   332A      2.184637   333A      2.188182  
+     334A      2.192619   335A      2.194079   336A      2.199648  
+     337A      2.201432   338A      2.204413   339A      2.212300  
+     340A      2.218686   341A      2.248676   342A      2.251344  
+     343A      2.259713   344A      2.272403   345A      2.272761  
+     346A      2.297082   347A      2.297723   348A      2.307989  
+     349A      2.322978   350A      2.329070   351A      2.384660  
+     352A      2.395413   353A      2.402156   354A      2.405093  
+     355A      2.410192   356A      2.436317   357A      2.446263  
+     358A      2.446416   359A      2.552692   360A      2.553025  
+     361A      2.553767   362A      2.562909   363A      2.765755  
+     364A      2.766006   365A      2.766666   366A      2.770361  
+     367A      2.785760   368A      2.812855   369A      2.833985  
+     370A      2.843002   371A      2.849215   372A      2.871950  
+     373A      2.909644   374A      2.936697   375A      2.938885  
+     376A      2.956931   377A      3.182614   378A      3.183800  
+     379A      3.209040   380A      3.271160   381A      3.283553  
+     382A      3.292957   383A      3.294303   384A      3.295793  
+     385A      3.313701   386A      3.358580   387A      3.407222  
+     388A      3.492145   389A      4.099574   390A      4.107590  
+     391A      4.111771   392A      4.151127  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [    48 ]
+    NA   [    48 ]
+    NB   [    48 ]
+
+  @RHF Final Energy:  -784.93379648847338
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =            719.6395439205231241
+    One-Electron Energy =               -2509.9935166102609401
+    Two-Electron Energy =                1005.4201762012644394
+    Total Energy =                       -784.9337964884734902
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+
+ Multipole Moments:
+
+ ------------------------------------------------------------------------------------
+     Multipole            Electronic (a.u.)      Nuclear  (a.u.)        Total (a.u.)
+ ------------------------------------------------------------------------------------
+
+ L = 1.  Multiply by 2.5417464519 to convert [e a0] to [Debye]
+ Dipole X            :          0.0000800           -0.0039501           -0.0038700
+ Dipole Y            :         -0.0222708            0.0153868           -0.0068841
+ Dipole Z            :         -0.0013023            0.0006796           -0.0006226
+ Magnitude           :                                                    0.0079218
+
+ ------------------------------------------------------------------------------------
+
+*** tstop() called on n027 at Thu Sep 14 10:09:38 2023
+Module time:
+	user time   =    2217.58 seconds =      36.96 minutes
+	system time =     290.38 seconds =       4.84 minutes
+	total time  =       4409 seconds =      73.48 minutes
+Total time:
+	user time   =    2217.58 seconds =      36.96 minutes
+	system time =     290.38 seconds =       4.84 minutes
+	total time  =       4409 seconds =      73.48 minutes
+
+*** tstart() called on n027
+*** at Thu Sep 14 10:09:38 2023
+
+
+	Wfn Parameters:
+	--------------------
+	Wavefunction         = CCSD
+	Number of irreps     = 1
+	Number of MOs        = 392
+	Number of active MOs = 392
+	AO-Basis             = NONE
+	Semicanonical        = false
+	Reference            = RHF
+	Print Level          = 2
+
+	IRREP	# MOs	# FZDC	# DOCC	# SOCC	# VIRT	# FZVR
+	-----	-----	------	------	------	------	------
+	 A	   392	    0	    48	    0	    344	    0
+	Transforming integrals...
+	IWL integrals will be deleted.
+	(OO|OO)...
+	Presorting SO-basis two-electron integrals.
+	Sorting File: SO Ints (nn|nn) nbuckets = 91
+	Constructing frozen core operators
+	Starting first half-transformation.
+	h = 0; memfree         = 65380032
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 72
+	h = 0; nbuckets        = 364
+	Sorting half-transformed integrals.
+	First half integral transformation complete.
+	Starting second half-transformation.
+	h = 0; memfree         = 65380032
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 116
+	h = 0; nbuckets        = 6
+	Two-electron integral transformation complete.
+	(OO|OV)...
+	Starting second half-transformation.
+	h = 0; memfree         = 65365824
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 116
+	h = 0; nbuckets        = 6
+	Two-electron integral transformation complete.
+	(OO|VV)...
+	Starting second half-transformation.
+	h = 0; memfree         = 65264000
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 116
+	h = 0; nbuckets        = 6
+	Two-electron integral transformation complete.
+	(OV|OO)...
+	Starting first half-transformation.
+	h = 0; memfree         = 65365824
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 72
+	h = 0; nbuckets        = 364
+	Sorting half-transformed integrals.
+	First half integral transformation complete.
+	Starting second half-transformation.
+	h = 0; memfree         = 65380032
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 188
+	h = 0; nbuckets        = 78
+	Two-electron integral transformation complete.
+	(OV|OV)...
+	Starting second half-transformation.
+	h = 0; memfree         = 65365824
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 188
+	h = 0; nbuckets        = 78
+	Two-electron integral transformation complete.
+	(OV|VV)...
+	Starting second half-transformation.
+	h = 0; memfree         = 65264000
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 188
+	h = 0; nbuckets        = 78
+	Two-electron integral transformation complete.
+	(VV|OO)...
+	Starting first half-transformation.
+	h = 0; memfree         = 65264000
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 72
+	h = 0; nbuckets        = 364
+	Sorting half-transformed integrals.
+	First half integral transformation complete.
+	Starting second half-transformation.
+	h = 0; memfree         = 65380032
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 192
+	h = 0; nbuckets        = 280
+	Two-electron integral transformation complete.
+	(VV|OV)...
+	Starting second half-transformation.
+	h = 0; memfree         = 65365824
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 192
+	h = 0; nbuckets        = 280
+	Two-electron integral transformation complete.
+	(VV|VV)...
+	Starting second half-transformation.
+	h = 0; memfree         = 65264000
+	h = 0; rows_per_bucket = 212
+	h = 0; rows_left       = 192
+	h = 0; nbuckets        = 280
+	Two-electron integral transformation complete.
+	Frozen core energy     =      0.00000000000000
+
+	Size of irrep 0 of <ab|cd> integrals:  14003.409 (MW) / 112027.271 (MB)
+	Total:                                 14003.409 (MW) / 112027.271 (MB)
+
+	Size of irrep 0 of <ia|bc> integrals:   1953.964 (MW) /  15631.712 (MB)
+	Total:                                  1953.964 (MW) /  15631.712 (MB)
+
+	Size of irrep 0 of tijab amplitudes:     272.646 (MW) /   2181.169 (MB)
+	Total:                                   272.646 (MW) /   2181.169 (MB)
+
+LIBDPD: Out-of-core algorithm not yet coded for sqrp sort.
+Error in: buf4_sort

@@ -1,6 +1,8 @@
 import math
 import numpy as np
 
+memory 20 GB
+
 set reference rhf
 
 molecule becp {
@@ -33,13 +35,14 @@ Mg   -1.370277208974   -0.023879134755   -0.001080310946
  H     -0.13744   -0.00096   -1.40224
  H     -0.20477    0.00882    1.64703
 }
-set MP2_TYPE CONV
-E, wfn = optimize("mp2/aug-cc-pVDZ", return_wfn = True)
 
-becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
+set CACHELEVEL 1
+E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
+
+becp.save_xyz_file("out/dimagnesocene_h4.xyz", True)
 
 fstr = ""
-with open("out/dimagnesocene_h2.xyz", "r") as fp :
+with open("out/dimagnesocene_h4.xyz", "r") as fp :
     for line in fp :
         newline = line[0]
         for i in range(1, len(line)) :
@@ -49,12 +52,16 @@ with open("out/dimagnesocene_h2.xyz", "r") as fp :
                 newline += line[i]
         fstr += newline
 
-with open("out/dimagnesocene_h2.xyz", "w") as fp :
+with open("out/dimagnesocene_h4.xyz", "w") as fp :
     print(fstr, file = fp)
 
-wfn.to_file("out/dimagnesocene_h2.wf")
+wfn.to_file("out/dimagnesocene_h4.wf")
 try:
-    fchk(wfn, "out/dimagnesocene_h2.fchk")
+    fchk(wfn, "out/dimagnesocene_h4.fchk")
 except Exception :
     E, wfn = energy("hf/6-311g", return_wfn = True)
-    fchk(wfn, "out/dimagnesocene_h2.fchk")
+    fchk(wfn, "out/dimagnesocene_h4.fchk")
+
+set cubeprop_tasks ["density"]
+set CUBEPROP_FILE_PATH "/home/vulcan/cgb31826/git/Dimagnesocene/out/magnesium/dimagnesocene_h4"
+cubeprop(wfn)
