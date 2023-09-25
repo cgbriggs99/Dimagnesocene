@@ -46,7 +46,7 @@ set PRINT 2
 
 E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
-becp.save_xyz_file("out/dimagnesocene.xyz", True)
+becp.save_xyz_file("out/magnesium/dimagnesocene.xyz", True)
 
 fstr = ""
 with open("out/magnesium/dimagnesocene.xyz", "r") as fp :

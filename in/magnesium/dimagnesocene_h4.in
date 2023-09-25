@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-memory 20 GB
+memory 24 GB
 
 set reference rhf
 
@@ -36,7 +36,7 @@ Mg   -1.370277208974   -0.023879134755   -0.001080310946
  H     -0.20477    0.00882    1.64703
 }
 
-set CACHELEVEL 1
+set CACHELEVEL 0
 E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
 becp.save_xyz_file("out/dimagnesocene_h4.xyz", True)
@@ -63,5 +63,4 @@ except Exception :
     fchk(wfn, "out/dimagnesocene_h4.fchk")
 
 set cubeprop_tasks ["density"]
-set CUBEPROP_FILE_PATH "/home/vulcan/cgb31826/git/Dimagnesocene/out/magnesium/dimagnesocene_h4"
-cubeprop(wfn)
+cubeprop(wfn, CUBEPROP_FILEPATH="/home/vulcan/cgb31826/git/Dimagnesocene/out/magnesium/dimagnesocene_h4")
