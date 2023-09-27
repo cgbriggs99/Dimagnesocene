@@ -37,7 +37,7 @@ C            6.061792767039     1.870632505132    -1.335379049022
 }
 
 set CACHELEVEL 0
-set SOSCF
+
 E, wfn = optimize("hf/sto-3g", return_wfn = True)
 
 becp.save_xyz_file("out/magnesium/dimagnesocene_h4.xyz", True)
