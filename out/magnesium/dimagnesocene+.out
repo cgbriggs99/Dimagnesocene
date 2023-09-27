@@ -11179,3 +11179,484 @@ MP2 correlation energy -1.4172119543009281
      <ij||ab> -> T2 ...complete
      F -> T2        ...complete
      Wmnij -> T2    ...complete
+     <ab||cd> -> T2 ...complete
+     Z -> T2        ...complete
+     <ia||bc> -> T2 ...complete
+     <ij||ka> -> T2 ...complete
+     Wmbej -> T2    ...complete
+     <ia||jb> -> T2 ...complete
+     T2 amplitudes  ...complete
+    20        -1.472249244095825    5.140e-08    0.010616    0.000000    0.000000    0.000000
+
+    Iterations converged.
+
+
+    Largest TIA Amplitudes:
+             42   3        -0.0164311158
+             42  15         0.0143922324
+             44  55        -0.0140015649
+             43  56        -0.0138999823
+             45  64        -0.0129438500
+             46  63        -0.0126252257
+             43  55         0.0124566633
+             44  56        -0.0123689811
+             45  58         0.0110522143
+             46  57         0.0110480766
+
+    Largest Tia Amplitudes:
+             36   0         0.0198662716
+             42  56         0.0137338411
+             43  57        -0.0136154387
+             43  56        -0.0132995461
+             42  57        -0.0131824071
+             45  65        -0.0112704820
+             44  64        -0.0111594375
+             36  68         0.0106211973
+             44  65         0.0101276421
+             45  64        -0.0100363145
+
+    Largest TIJAB Amplitudes:
+     46  45   9   8         0.0199470604
+     44  43   7   6         0.0198299925
+     46  45   7   6         0.0188788882
+     44  43   9   8         0.0186734813
+     45  44   8   7         0.0179366079
+     46  43   8   7        -0.0179339256
+     46  43   9   6         0.0179330953
+     45  44   9   6        -0.0179329914
+     46  42   2   0        -0.0117841446
+     45  42   2   1        -0.0117124211
+
+    Largest Tijab Amplitudes:
+     45  44  10   9         0.0194987516
+     43  42   8   7         0.0193843637
+     45  42   9   8        -0.0193337513
+     44  43   9   8         0.0193334680
+     44  43  10   7        -0.0193284104
+     45  42  10   7         0.0193283205
+     45  44   8   7         0.0185213454
+     43  42  10   9         0.0183994814
+     40  39  29  28         0.0062195141
+     41  38  29  28        -0.0062075138
+
+    Largest TIjAb Amplitudes:
+     44  45   6   9        -0.0253389089
+     43  44   6   9        -0.0253299571
+     43  44   7  10        -0.0252542562
+     44  45   7  10        -0.0252478467
+     44  43   6   7        -0.0252411987
+     43  42   6   7        -0.0252201450
+     43  42   7   8        -0.0251686423
+     44  43   7   8        -0.0251472085
+     44  43   9  10        -0.0247914743
+     44  45   8   7        -0.0247903025
+
+    SCF energy       (wfn)                    = -783.551122712881806
+    Reference energy (file100)                = -783.551122712880669
+
+    Opposite-spin MP2 correlation energy      =   -1.038231267468929
+    Same-spin MP2 correlation energy          =   -0.378980686831999
+    Singles MP2 correlation energy            =   -0.000000000000000
+    MP2 correlation energy                    =   -1.417211954300928
+      * MP2 total energy                      = -784.968334667181580
+
+    Opposite-spin CCSD correlation energy     =   -1.133720993412294
+    Same-spin CCSD correlation energy         =   -0.338528250683531
+    Singles CCSD correlation energy           =   -0.000000000000000
+    CCSD correlation energy                   =   -1.472249244095825
+      * CCSD total energy                     = -785.023371956976462
+
+
+			**************************
+			*                        *
+			*         CCHBAR         *
+			*                        *
+			**************************
+
+     F elements     ...complete
+     Wamef elements ...complete
+     Wmnie elements ...complete
+     Wabei elements ...complete
+     Wmbej elements ...complete
+     Wmbij elements ...complete
+
+			**************************
+			*        CCLAMBDA        *
+			**************************
+
+
+	Nuclear Rep. energy (wfn)     =  676.606881725061157
+	Reference           (wfn)     =                    2
+	SCF energy          (wfn)     = -783.551122712881806
+	Reference energy    (CC_INFO) = -783.551122712880669
+	CCSD energy         (CC_INFO) =   -1.472249244095825
+	Total CCSD energy   (CC_INFO) = -785.023371956976462
+
+	Input parameters:
+	-----------------
+	Maxiter           =     50
+	Convergence       = 1.0e-07
+	Restart           =     No
+	Cache Level       =     1
+	Model III         =     No
+	DIIS              =     Yes
+	AO Basis          =     No
+	ABCD              =     NEW
+	Local CC          =     No
+	Parameters for left-handed eigenvectors:
+	    Irr   Root  Ground-State?    EOM energy        R0
+	  1   0     0        Yes       0.0000000000   1.0000000000
+	Labels for eigenvector 1:
+	LIA 0 -1, Lia 0 -1, LIJAB 0 -1, Lijab 0 -1, LIjAb 0 -1, 2LIjAb - LIjbA 0 -1
+	Symmetry of left-hand state: A
+	Symmetry of left-hand eigenvector: A
+
+	          Solving Lambda Equations
+	          ------------------------
+	Iter     PseudoEnergy or Norm         RMS  
+	----     ---------------------     --------
+	   0        -1.472344887012942    3.904e-08
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   1        -1.427690371179826    3.166e-02
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   2        -1.423998148644048    6.619e-03
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   3        -1.422730969075311    2.145e-03
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   4        -1.422742932517603    6.507e-04
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   5        -1.422753381649678    2.044e-04
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   6        -1.422748969061691    6.875e-05
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   7        -1.422748997963723    2.797e-05
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   8        -1.422749027137427    1.056e-05
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	   9        -1.422749092275111    3.842e-06
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	  10        -1.422749184684307    1.632e-06
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	  11        -1.422749131834300    9.638e-07
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	  12        -1.422749139198008    6.253e-07
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	  13        -1.422749131741166    3.929e-07
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	  14        -1.422749128116682    2.224e-07
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	  15        -1.422749132191217    1.008e-07
+     L1 amplitudes  ...complete
+     <ij||ab> -> L2 ...complete
+     Wmnij -> L2    ...complete
+     Wabef -> L2    ...complete
+     Wamef -> L2    ...complete
+     Wmnie -> L2    ...complete
+     G -> L2        ...complete
+     F -> L2        ...complete
+     Wmbej -> L2    ...complete
+     L1*F -> L2     ...complete
+     L2 amplitudes  ...complete
+	  16        -1.422749131436370    3.930e-08
+
+	Largest LIA Amplitudes:
+	         42   3        -0.0147159459
+	         42  15         0.0138979179
+	         44  55        -0.0110878426
+	         43  56        -0.0110056147
+	         45  64        -0.0101737734
+	         46  63        -0.0099185175
+	         43  55         0.0098644492
+	         44  56        -0.0097934001
+	         42  29         0.0095312205
+	         45  58         0.0087156753
+
+	Largest Lia Amplitudes:
+	         36   0         0.0169033190
+	         42  56         0.0107775020
+	         43  57        -0.0106822114
+	         43  56        -0.0104366256
+	         42  57        -0.0103425322
+	         45  65        -0.0087973391
+	         44  64        -0.0087082584
+	         36  68         0.0083615123
+	         44  65         0.0079051630
+	         45  64        -0.0078317949
+
+	Largest LIJAB Amplitudes:
+	 46  45   9   8         0.0186100404
+	 44  43   7   6         0.0185207643
+	 46  45   7   6         0.0175860521
+	 44  43   9   8         0.0174137282
+	 45  44   8   7         0.0167306869
+	 46  43   8   7        -0.0167281686
+	 46  43   9   6         0.0167273808
+	 45  44   9   6        -0.0167273124
+	 46  42   2   0        -0.0110559941
+	 45  42   2   1        -0.0109888835
+
+	Largest Lijab Amplitudes:
+	 45  44  10   9         0.0181798697
+	 43  42   8   7         0.0180782313
+	 45  42   9   8        -0.0180129460
+	 44  43   9   8         0.0180126606
+	 44  43  10   7        -0.0180079461
+	 45  42  10   7         0.0180078497
+	 45  44   8   7         0.0172385718
+	 43  42  10   9         0.0171286604
+	 40  39  29  28         0.0060482830
+	 41  38  29  28        -0.0060365992
+
+	Largest LIjAb Amplitudes:
+	 44  45   6   9        -0.0235776791
+	 43  44   6   9        -0.0235689821
+	 43  44   7  10        -0.0235000889
+	 44  45   7  10        -0.0234938613
+	 44  43   6   7        -0.0234913070
+	 43  42   6   7        -0.0234710718
+	 43  42   7   8        -0.0234251557
+	 44  43   7   8        -0.0234045095
+	 44  43   9  10        -0.0230582330
+	 44  45   8   7        -0.0230522525
+
+	Iterations converged.
+
+	Overlap <L|e^T> =        0.41819162231
+
+			**************************
+			*                        *
+			*        CCDENSITY       *
+			*                        *
+			**************************
+
+
+	Input parameters:
+	-----------------
+	Wave function    =   CCSD
+	Reference wfn    =   UHF
+	Dertype          = 1
+	Tolerance        = 1.0e-14
+	Cache Level      = 1
+	AO Basis         = No
+	OPDM Only        = No
+	Relax OPDM       = Yes
+	Compute Xi       = No
+	Use Zeta         = No
+	Xi connected     = Yes
+	Compute NO       = No
+
+	Nuclear Rep. energy (wfn)     =  676.606881725061157
+	SCF energy          (wfn)     = -783.551122712881806
+	Reference energy    (file100) = -783.551122712880669
+	CCSD energy         (CC_INFO) =   -1.472249244095825
+	Total CCSD energy   (CC_INFO) = -785.023371956976462
+	Number of States = 1
+
+	Ground?  State     EOM Energy       R0
+	  Yes     0  A    0.0000000000   1.00000000
+    Molecular point group: c1
+    Full point group: C1
+
+    Geometry (in Bohr), charge = 1, multiplicity = 2:
+
+       Center              X                  Y                   Z       
+    ------------   -----------------  -----------------  -----------------
+         C            6.640455933786     1.797344761905    -1.307314284037
+         C            6.657000583369     1.796711406872     1.407081588164
+         C            6.687392517898    -0.785423190568     2.245525395225
+         C            6.689661395931    -2.380684742735     0.048164523730
+         C            6.660719282546    -0.783911716198    -2.147457766756
+         C           -6.643632465592     1.963251210714    -1.419213953904
+         C           -6.656441929612     1.962434075858     1.295600886146
+         C           -6.683892667297    -0.619702439279     2.133692599578
+         C           -6.688097459370    -2.214757847568    -0.063145163804
+         C           -6.663304027403    -0.618533199889    -2.259067957248
+         H            6.733029358928     3.465775829277    -2.518658601699
+         H            6.764448823215     3.464386448286     2.618275458746
+         H            6.822139789067    -1.421855424916     4.204251758347
+         H            6.826470876030    -4.440091751098     0.046843287272
+         H            6.771377218422    -1.418906317881    -4.108117670737
+         H           -6.740475670311     3.631516869808    -2.630478107536
+         H           -6.763843892345     3.630267442045     2.506582076871
+         H           -6.814253221883    -1.255973259286     4.092754641352
+         H           -6.822203850385    -4.274330496044    -0.064402742918
+         H           -6.776647092966    -1.253380819207    -4.219626965875
+         MG           3.008992620068    -0.118418705469     0.078582517457
+         MG          -3.008924937891     0.054664581318    -0.042445228713
+
+	Presorting MO-basis TPDMs.
+	Sorting File: MO TPDM (AA|AA) nbuckets = 1
+	Sorting File: MO TPDM (AA|aa) nbuckets = 1
+	Sorting File: MO TPDM (aa|aa) nbuckets = 1
+	Starting first half-transformation.
+	h = 0; memfree         = 2999897848
+	h = 0; rows_per_bucket = 25651
+	h = 0; rows_left       = 0
+	h = 0; nbuckets        = 1
+
+	DPD File4 Cache Listing:
+
+Cache Label            DPD File symm  pq  rs  use acc clean    pri lock size(kB)
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Total cached:      0.0 kB; MRU =      0; LRU =      1
+#LRU deletions =      0; #Low-priority deletions =      0
+Core max size:  24000000.0 kB
+Core used:      10481203.8 kB
+Core available: 13518796.2 kB
+Core cached:          0.0 kB
+Locked cached:        0.0 kB
+Most recent entry  = 0
+Least recent entry = 1
+dpd_block_matrix: n = 25651  m = 51076
+Error in: dpd_block_matrix: No memory left.

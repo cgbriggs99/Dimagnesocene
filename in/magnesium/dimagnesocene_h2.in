@@ -38,10 +38,10 @@ set PRINT 2
 
 E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
-becp.save_xyz_file("out/dimagnesocene_h2.xyz", True)
+becp.save_xyz_file("out/magnesium/dimagnesocene_h2.xyz", True)
 
 fstr = ""
-with open("out/dimagnesocene_h2.xyz", "r") as fp :
+with open("out/magnesium/dimagnesocene_h2.xyz", "r") as fp :
     for line in fp :
         newline = line[0]
         for i in range(1, len(line)) :
@@ -51,12 +51,8 @@ with open("out/dimagnesocene_h2.xyz", "r") as fp :
                 newline += line[i]
         fstr += newline
 
-with open("out/dimagnesocene_h2.xyz", "w") as fp :
+with open("out/magnesium/dimagnesocene_h2.xyz", "w") as fp :
     print(fstr, file = fp)
 
-wfn.to_file("out/dimagnesocene_h2.wf")
-try:
-    fchk(wfn, "out/dimagnesocene_h2.fchk")
-except Exception :
-    E, wfn = energy("hf/6-311g", return_wfn = True)
-    fchk(wfn, "out/dimagnesocene_h2.fchk")
+wfn.to_file("out/magnesium/dimagnesocene_h2.wf")
+fchk(wfn, "out/magnesium/dimagnesocene_h2.fchk")
