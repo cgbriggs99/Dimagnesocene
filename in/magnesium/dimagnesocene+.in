@@ -31,6 +31,7 @@ molecule becp {
 
 }
 
+set CC_TYPE DF
 set CACHELEVEL 1
 set PRINT 2
 E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)

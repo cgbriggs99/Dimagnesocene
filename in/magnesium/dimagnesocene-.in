@@ -32,6 +32,7 @@ molecule becp {
 
 set OPT_TYPE TS
 set GEOM_MAXITER 150
+set CC_TYPE DF
 set CACHELEVEL 1
 set PRINT 2
 

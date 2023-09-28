@@ -36,6 +36,7 @@ C            6.061792767039     1.870632505132    -1.335379049022
          H            0.093073736040     0.844559918392     2.084629916719
 }
 
+set SCF_TYPE OUT_OF_CORE
 set CACHELEVEL 0
 
 E, wfn = optimize("hf/sto-3g", return_wfn = True)
