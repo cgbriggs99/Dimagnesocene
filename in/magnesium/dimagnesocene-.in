@@ -35,6 +35,7 @@ set GEOM_MAXITER 150
 set CC_TYPE DF
 set CACHELEVEL 1
 set PRINT 2
+set INTRAFRAG_STEP_LIMIT_MAX 0.25
 
 E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
