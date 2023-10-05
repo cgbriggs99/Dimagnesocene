@@ -1,0 +1,58 @@
+import math
+
+memory 24 GB
+set reference uhf
+
+molecule becp {
+    1 2
+    symmetry c1
+            C   3.1461274348   0.9627761284  -0.7011867685
+            C   3.1489696932   0.9626547900   0.7450156861
+            C   3.1542006554  -0.4127492906   1.1921964573
+            C   3.1540191502  -1.2624629173   0.0215870567
+            C   3.1491930869  -0.4105796174  -1.1474676106
+            C  -3.1505236277   1.0420558825  -0.7542045130
+            C  -3.1504365386   1.0417792145   0.6920853996
+            C  -3.1506410583  -0.3334340559   1.1393370766
+            C  -3.1504356447  -1.1832903156  -0.0312593572
+            C  -3.1505205419  -0.3315994611  -1.2003683033
+            H   3.1800490148   1.8467327921  -1.3413723636
+            H   3.1836047640   1.8443284709   1.3884038110
+            H   3.1900815425  -0.7512232088   2.2298887013
+            H   3.1896991592  -2.3539371105   0.0211174065
+            H   3.1835510055  -0.7514004331  -2.1844341729
+            H  -3.1884006259   1.9258805001  -1.3943530013
+            H  -3.1864570071   1.9223035343   1.3369795364
+            H  -3.1834409500  -0.6728489015   2.1768075848
+            H  -3.1829569053  -2.2748548581  -0.0306841732
+            H  -3.1860807499  -0.6744086378  -2.2366485146
+           Mg   1.3572648416  -0.0588489163   0.0385254606
+           Mg  -1.3571108681   0.0248567438  -0.0200584090
+
+}
+
+set CC_TYPE DF
+set CACHELEVEL 1
+set PRINT 2
+E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
+
+
+becp.save_xyz_file("out/magnesium/dimagnesocene+.xyz", True)
+
+fstr = ""
+with open("out/magnesium/dimagnesocene+.xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
+
+with open("out/magnesium/dimagnesocene+.xyz", "w") as fp :
+    print(fstr, file = fp)
+
+wfn.to_file("out/magnesium/dimagnesocene+.wf")
+fchk(wfn, "out/magnesium/dimagnesocene+.fchk")
+

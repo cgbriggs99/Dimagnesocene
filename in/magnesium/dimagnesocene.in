@@ -9,34 +9,28 @@ molecule becp {
     0 1
     symmetry c1
 
-    C
-    C 1 dcc
-    C 2 dcc 1 108
-    C 3 dcc 2 108 1 0
-    C 4 dcc 3 108 2 0
-    C 1 drr 2 90  3 90
-    C 2 drr 3 90  4 90
-    C 3 drr 4 90  5 90
-    C 8 dcc 7 108 6 0
-    C 9 dcc 8 108 7 0
-    H 1 dch 2 126 3 180
-    H 2 dch 3 126 4 180
-    H 3 dch 4 126 5 180
-    H 4 dch 5 126 1 180
-    H 5 dch 1 126 2 180
-    H 6 dch 7 126 8 180
-    H 7 dch 8 126 9 180
-    H 8 dch 9 126 10 180
-    H 9 dch 10 126 6 180
-    H 10 dch 6 126 7 180
-    Mg 1 dcbe 11 achbe 6 0
-    Mg 6 dcbe 16 achbe 1 0
-
-    dcc = 1.33
-    drr = 5.092
-    dch = 1.088
-    dcbe = 1.930
-    achbe = 128.09
+ C    3.441180923525    0.977705315022   -0.723733370008
+ C    3.441180923525    0.977705315022    0.706771280111
+ C    3.441180923525   -0.382748713441    1.148934587556
+ C    3.441178951481   -1.223633029975   -0.008328183043
+ C    3.441166399939   -0.382788442636   -1.165619820357
+ C   -3.441361145694    0.996779262925   -0.700115463316
+ C   -3.441375487354    0.990660149999    0.730358965242
+ C   -3.441396293404   -0.371702025515    1.166704766947
+ C   -3.441323122208   -1.207618489068    0.005848524935
+ C   -3.441297575292   -0.361864678213   -1.147860296555
+ H    3.470190745189    1.861032643551   -1.365470610755
+ H    3.470375844519    1.860874255049    1.348718088812
+ H    3.471559429043   -0.720219668880    2.187263016272
+ H    3.472033224940   -2.315412969229   -0.008270789799
+ H    3.471201758314   -0.720683626908   -2.203820257139
+ H   -3.471000721493    1.882722941500   -1.338206929473
+ H   -3.471120433922    1.870903983420    1.376285785493
+ H   -3.471589900103   -0.713769813544    2.203533296526
+ H   -3.471655142681   -2.299403231255    0.001214897600
+ H   -3.471315631196   -0.695530770938   -2.187428129900
+MG    1.390687760939   -0.008896143154   -0.008797779555
+MG   -1.390199240363    0.002203139048    0.001732609642
 
 }
 
@@ -44,23 +38,4 @@ set SCF_INITIAL_ACCELERATOR NONE
 set CACHELEVEL 1
 set PRINT 2
 
-E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
-
-becp.save_xyz_file("out/magnesium/dimagnesocene.xyz", True)
-
-fstr = ""
-with open("out/magnesium/dimagnesocene.xyz", "r") as fp :
-    for line in fp :
-        newline = line[0]
-        for i in range(1, len(line)) :
-            if line[i - 1].isupper() and line[i].isupper() :
-                newline += line[i].lower()
-            else :
-                newline += line[i]
-        fstr += newline
-
-with open("out/magnesium/dimagnesocene.xyz", "w") as fp :
-    print(fstr, file = fp)
-
-wfn.to_file("out/magnesium/dimagnesocene.wf")
-fchk(wfn, "out/magnesium/dimagnesocene.fchk")
+E, wfn = frequencies("ccsd/cc-pVDZ", return_wfn = True)
