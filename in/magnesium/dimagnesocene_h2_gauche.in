@@ -1,0 +1,59 @@
+import math
+import numpy as np
+
+set reference rhf
+memory 24 GB
+
+molecule becp {
+    0 1
+    symmetry c1
+C      3.44218    0.97437   -0.72466
+C      3.44695    0.97134    0.70580
+C      3.44384   -0.39005    1.14497
+C      3.43715   -1.22840   -0.01407
+C      3.43612   -0.38514   -1.16956
+C     -3.44384    0.39004   -1.14498
+C     -3.43714    1.22839    0.01406
+C     -3.43612    0.38514    1.16956
+C     -3.44218   -0.97438    0.72465
+C     -3.44695   -0.97135   -0.70581
+H      3.47296    1.85889   -1.36463
+H      3.48201    1.85314    1.34929
+H      3.47611   -0.72972    2.18250
+H      3.46341   -2.32027   -0.01647
+H      3.46146   -0.72042   -2.20871
+H     -3.47610    0.72971   -2.18250
+H     -3.46340    2.32026    0.01646
+H     -3.46146    0.72041    2.20870
+H     -3.47295   -1.85890    1.36462
+H     -3.48200   -1.85315   -1.34930
+Mg     1.39045   -0.00468   -0.00465
+Mg    -1.39045    0.00467    0.00464
+H     -0.01994    1.19628    0.00000
+H      0.16349   -1.45149    0.00000
+}
+
+set CACHELEVEL 1
+
+E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
+
+becp.save_xyz_file("out/magnesium/dimagnesocene_h2_gauche.xyz", True)
+
+wfn.to_file("out/magnesium/dimagnesocene_h2_gauche.wf")
+fchk(wfn, "out/magnesium/dimagnesocene_h2_gauche.fchk")
+
+fstr = ""
+with open("out/magnesium/dimagnesocene_h2_gauche.xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
+
+with open("out/magnesium/dimagnesocene_h2_gauche.xyz", "w") as fp :
+    print(fstr, file = fp)
+
+frequencies("ccsd/cc-pVDZ")
