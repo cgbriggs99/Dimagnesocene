@@ -30,5 +30,7 @@ Mg   -1.356221948546    0.016934747575    0.003150422864
 }
 
 set CACHELEVEL 1
+set CC_TYPE DF
+set SCF_TYPE DF
 
-frequencies("ccsd/cc-pVDZ", return_wfn)
+frequencies("ccsd/cc-pVDZ")
