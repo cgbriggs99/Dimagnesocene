@@ -163,3 +163,4 @@ cython_debug/
 *.o9*
 *.clean
 timer.dat
+*~
