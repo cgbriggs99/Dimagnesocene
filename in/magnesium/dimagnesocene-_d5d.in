@@ -41,8 +41,11 @@ E, wfn = optimize("ccsd/cc-pVDZ", return_wfn = True)
 
 becp.save_xyz_file("out/magnesium/dimagnesocene-_d5d.xyz", True)
 
-wfn.to_file("out/magnesium/dimagnesocene-_d5d.wf")
-fchk(wfn, "out/magnesium/dimagnesocene-_d5d.fchk")
+try :
+    wfn.to_file("out/magnesium/dimagnesocene-_d5d.wf")
+    fchk(wfn, "out/magnesium/dimagnesocene-_d5d.fchk")
+except Exception as e :
+    pass
 
 fstr = ""
 with open("out/magnesium/dimagnesocene-_d5d.xyz", "r") as fp :
