@@ -11,8 +11,8 @@
 
 
 
-H:cc-pVDZ
-cc-pVDZ
+H:DZ
+DZ
 
   2
     0    1
@@ -30,8 +30,8 @@ cc-pVDZ
 
 1.0000000 
 
-C:cc-pVDZ
-cc-pVDZ
+C:DZ
+DZ
 
   3
     0    1    2
@@ -62,8 +62,8 @@ cc-pVDZ
 
 1.0000000 
 
-MG:cc-pVDZ
-cc-pVDZ
+MG:DZ
+DZ
 
   3
     0    1    2

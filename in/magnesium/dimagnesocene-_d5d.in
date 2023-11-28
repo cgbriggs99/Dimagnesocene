@@ -60,3 +60,5 @@ with open("out/magnesium/dimagnesocene-_d5d.xyz", "r") as fp :
 
 with open("out/magnesium/dimagnesocene-_d5d.xyz", "w") as fp :
     print(fstr, file = fp)
+
+frequencies("ccsd/c-pVDZ")
