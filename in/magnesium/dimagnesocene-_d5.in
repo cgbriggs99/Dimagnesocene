@@ -34,8 +34,8 @@ set OPT_TYPE TS
 set GEOM_MAXITER 150
 set CC_TYPE DF
 set CACHELEVEL 1
-set PRINT 2
 set INTRAFRAG_STEP_LIMIT_MAX 0.25
+set MAXITER 150
 
 set optking {
     ranged_dihedral = ("

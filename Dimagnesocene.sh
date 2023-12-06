@@ -1,6 +1,6 @@
 #!/bin/sh
 #$ -q gen4.q
-#$ -N dimgcp+_freqs
+#$ -N dimgcp-_d5
 #$ -S /bin/sh
 #$ -cwd
 
@@ -18,49 +18,15 @@ echo "    ID:                "$JOB_ID
 echo "    Hostname:          "$HOSTNAME
 echo "    Working directory: "$SGE_O_WORKDIR
 echo ""
-echo "    Submitted using:   submit -n 8 -N dimgcp+_freqs -i in/magnesium/dimagnesocene+_freqs.zmat -o out/magnesium/dimagnesocene+_freqs.out gen4.q cfour@2.0~mpi+vectorization"
+echo "    Submitted using:   submit -n 8 -N dimgcp-_d5 -i in/magnesium/dimagnesocene-_d5.in -o out/magnesium/dimagnesocene-_d5.out gen4.q psi4@master"
 echo "***********************************************************************"
 
 
-# Load the requested Cfour module file
-vulcan load cfour@2.0~mpi+vectorization
+# Load the requested Psi4 module file
+vulcan load psi4@master~ambit~chemps2~debug~pcmsolver~vectorization
 
-scratch=$TMPDIR/$USER/$JOB_ID
+export PSI_SCRATCH=$TMPDIR
+export KMP_DUPLICATE_LIB_OK=TRUE
 
-# Set variables
-export OMP_NUM_THREADS=4
-export NSLOTS=8
-prefix=/opt/vulcan/opt/vulcan/linux-x86_64/intel-13.0.0/cfour-2.0-yhj426etc3g7hslvbmpgvdymp2w76rob
+psi4 -n 8 -i in/magnesium/dimagnesocene-_d5.in -o out/magnesium/dimagnesocene-_d5.out
 
-# Copy job data
-cp $SGE_O_WORKDIR/in/magnesium/dimagnesocene+_freqs.zmat $scratch/ZMAT
-cp $prefix/basis/GENBAS $scratch
-cp $prefix/basis/ECPDATA $scratch
-if [ -e JAINDX ]; then cp JAINDX $scratch ; fi
-if [ -e JOBARC ]; then cp JOBARC $scratch ; fi
-if [ -e FCMINT ]; then cp FCMINT $scratch ; fi
-if [ -e GENBAS ]; then cp GENBAS $scratch ; fi
-if [ -e ECPDATA ]; then cp ECPDATA $scratch ; fi
-if [ -e OPTARC ]; then cp OPTARC $scratch ; fi
-if [ -e ISOTOPES ]; then cp ISOTOPES $scratch ; fi
-if [ -e ISOMASS ]; then cp ISOMASS $scratch ; fi
-if [ -e initden.dat ]; then cp initden.dat $scratch ; fi
-if [ -e OLDMOS ]; then cp OLDMOS $scratch ; fi
-
-echo " Running cfour on `hostname`"
-echo " Running calculation..."
-
-cd $scratch
-xcfour >& $SGE_O_WORKDIR/out/magnesium/dimagnesocene+_freqs.out
-xja2fja
-/opt/scripts/cfour2avogadro $SGE_O_WORKDIR/out/magnesium/dimagnesocene+_freqs.out
-
-echo " Saving data and cleaning up..."
-if [ -e ZMATnew ]; then cp -f ZMATnew $SGE_O_WORKDIR/ZMATnew ; fi
-
-# Create a job data archive file
-tar --transform "s,^,Job_Data_$JOB_ID/," -vcf $SGE_O_WORKDIR/Job_Data_$JOB_ID.tar OPTARC FCMINT FCMFINAL ZMATnew JMOL.plot JOBARC JAINDX FJOBARC DIPDER HESSIAN MOLDEN NEWMOS AVOGADROplot.log den.dat
-if [ -e zmat001 ]; then tar --transform "s,^,Job_Data_$JOB_ID/," -vrf $SGE_O_WORKDIR/Job_Data_$JOB_ID.tar zmat* ; fi
-gzip $SGE_O_WORKDIR/Job_Data_$JOB_ID.tar
-
-echo " Job complete on `hostname`."
