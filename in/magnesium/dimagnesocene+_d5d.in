@@ -1,6 +1,6 @@
 import math
 
-memory 24 GB
+memory 45 GB
 set reference uhf
 
 molecule becp {
