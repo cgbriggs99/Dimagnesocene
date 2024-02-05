@@ -34,4 +34,26 @@ Mg   -1.390450900390    0.004674326026    0.004644269422
 set SCF_INITIAL_ACCELERATOR NONE
 set CACHELEVEL 1
 
-frequencies("ccsd/cc-pVDZ", mode="sow")
+prefix = "out/magnesium/M06-2X/dimagnesocene_d5d"
+
+
+E, wfn = optimize("M06-2X/cc-pVDZ", return_wfn = True)
+
+becp.save_xyz_file(prefix + ".xyz", True)
+
+wfn.to_file(prefix + ".wf")
+fchk(wfn, prefix + ".fchk")
+
+fstr = ""
+with open(prefix + ".xyz", "r") as fp :
+    for line in fp :
+        newline = line[0]
+        for i in range(1, len(line)) :
+            if line[i - 1].isupper() and line[i].isupper() :
+                newline += line[i].lower()
+            else :
+                newline += line[i]
+        fstr += newline
+
+with open(prefix + ".xyz", "w") as fp :
+    print(fstr, file = fp)

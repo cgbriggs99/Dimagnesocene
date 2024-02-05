@@ -1,0 +1,111 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.8.1 release
+
+                         Git: Rev {} zzzzzzz 
+
+
+    D. G. A. Smith, L. A. Burns, A. C. Simmonett, R. M. Parrish,
+    M. C. Schieber, R. Galvelis, P. Kraus, H. Kruse, R. Di Remigio,
+    A. Alenaizan, A. M. James, S. Lehtola, J. P. Misiewicz, M. Scheurer,
+    R. A. Shaw, J. B. Schriber, Y. Xie, Z. L. Glick, D. A. Sirianni,
+    J. S. O'Brien, J. M. Waldrop, A. Kumar, E. G. Hohenstein,
+    B. P. Pritchard, B. R. Brooks, H. F. Schaefer III, A. Yu. Sokolov,
+    K. Patkowski, A. E. DePrince III, U. Bozkaya, R. A. King,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, C. D. Sherrill,
+    J. Chem. Phys. 152(18) 184108 (2020). https://doi.org/10.1063/5.0006002
+
+                            Additional Code Authors
+    E. T. Seidl, C. L. Janssen, E. F. Valeev, M. L. Leininger,
+    J. F. Gonthier, R. M. Richard, H. R. McAlexander, M. Saitow, X. Wang,
+    P. Verma, M. H. Lechner, A. Jiang, S. Behnle, A. G. Heide,
+    M. F. Herbst, and D. L. Poole
+
+             Previous Authors, Complete List of Code Contributors,
+                       and Citations for Specific Modules
+    https://github.com/psi4/psi4/blob/master/codemeta.json
+    https://github.com/psi4/psi4/graphs/contributors
+    http://psicode.org/psi4manual/master/introduction.html#citing-psifour
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Friday, 08 December 2023 01:02PM
+
+    Process ID: 752754
+    Host:       connor-MS-7E07
+    PSIDATADIR: /home/connor/miniconda3/envs/p4env/share/psi4
+    Memory:     500.0 MiB
+    Threads:    8
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+set reference rhf
+
+memory 45 GB
+
+molecule becp {
+    0 1
+    symmetry c1
+
+ C    3.442179099610    0.974374326026   -0.724655730578
+ C    3.446949099610    0.971344326026    0.705804269422
+ C    3.443839099610   -0.390045673974    1.144974269422
+ C    3.437149099610   -1.228395673974   -0.014065730578
+ C    3.436119099610   -0.385135673974   -1.169555730578
+ C   -3.443840900390    0.390044326026   -1.144975730578
+ C   -3.437140900390    1.228394326026    0.014064269422
+ C   -3.436120900390    0.385144326026    1.169564269422
+ C   -3.442180900390   -0.974375673974    0.724654269422
+ C   -3.446950900390   -0.971345673974   -0.705805730578
+ H    3.472959099610    1.858894326026   -1.364625730578
+ H    3.482009099610    1.853144326026    1.349294269422
+ H    3.476109099610   -0.729715673974    2.182504269422
+ H    3.463409099610   -2.320265673974   -0.016465730578
+ H    3.461459099610   -0.720415673974   -2.208705730578
+ H   -3.476100900390    0.729714326026   -2.182495730578
+ H   -3.463400900390    2.320264326026    0.016464269422
+ H   -3.461460900390    0.720414326026    2.208704269422
+ H   -3.472950900390   -1.858895673974    1.364624269422
+ H   -3.482000900390   -1.853145673974   -1.349295730578
+Mg    1.390449099610   -0.004675673974   -0.004645730578
+Mg   -1.390450900390    0.004674326026    0.004644269422
+
+}
+
+set SCF_INITIAL_ACCELERATOR NONE
+set CACHELEVEL 1
+
+frequencies("ccsd/cc-pVDZ", mode="sow")
+--------------------------------------------------------------------------
+
+  Memory set to  41.910 GiB by Python driver.
+
+         ----------------------------------------------------------
+                                   FINDIF
+                     R. A. King and Jonathon Misiewicz
+         ----------------------------------------------------------
+
+  Using finite-differences of gradients to determine vibrational frequencies and 
+  normal modes. Resulting frequencies are only valid at stationary points.
+    Generating geometries for use with 3-point formula.
+    Displacement size will be 5.00e-03.
+    Number of atoms is 22.
+    Number of irreps is 1.
+    Number of SALCs is 63.
+    Translations projected? 1. Rotations projected? 0.
+    Index of SALCs per irrep:
+      1 :  0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62 
+    Number of SALCs per irrep:
+      Irrep 1: 63
+    Number of geometries (including reference) is 127.
+    Number of displacements per irrep:
+      Irrep 1: 126
+ 127 displacements needed ...
+
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+  //    FiniteDifference Computations  //
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
+
