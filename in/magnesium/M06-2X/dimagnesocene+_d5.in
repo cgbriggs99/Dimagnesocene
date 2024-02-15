@@ -31,10 +31,7 @@ Mg    -1.39045    0.00507    0.00479
 
 }
 
-set CC_TYPE DF
 set CACHELEVEL 1
-set PRINT 2
-set INTRAFRAG_STEP_LIMIT_MAX 0.25
 
 set optking {
     ranged_dihedral = ("
