@@ -3,7 +3,7 @@ import numpy as np
 
 set reference rhf
 
-memory 24 GB
+memory 45 GB
 
 molecule becp {
     0 1
@@ -35,7 +35,6 @@ MG   -1.390199240363    0.002203139048    0.001732609642
 }
 
 set SCF_INITIAL_ACCELERATOR NONE
-set CACHELEVEL 1
 set PRINT 2
 
 E, wfn = frequencies("ccsd/cc-pVDZ", return_wfn = True)
